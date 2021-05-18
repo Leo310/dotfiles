@@ -1,0 +1,12 @@
+vim
+vim plugins
+mysqlcli
+tor browser
+discord
+telegram
+whatsapp web
+teams
+spotify
+chrome
+nvm
+docker
