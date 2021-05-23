@@ -59,6 +59,10 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" Sets vim colorscheme
+packadd! dracula
+colorscheme dracula
+
 " Sets line numbers
 :set nu
 :set rnu
@@ -66,33 +70,44 @@ map <C-l> <C-w>l
 " Session settings
 let g:sessions_dir = '~/.vim/sessions'
 exec 'nnoremap <Leader>ss :NERDTreeClose \| :mksession! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
-exec 'nnoremap <Leader>sr :bufdo bd \| :so ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
-exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir. '/*.vim<C-D><BS><BS><BS><BS><BS>'
+exec 'nnoremap <Leader>sr :bufdo bd \| :so ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
 " Nerdtree settings
-" Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
-
-" Directly open NerdTree on editing file
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 nnoremap <C-s> :NERDTreeToggle<Enter>
 
 " Closing on file opening
 let NERDTreeQuitOnOpen = 1
-" Exit Vim if NERDTree is the only window left.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
 
 " Prettier
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
+" Highlights current file
+" Check if NERDTree is open or active
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call SyncTree()"
 
 " Lightline settings
 " colorscheme
 let g:lightline = {
-      \ 'colorscheme': 'molokai',
+	\ 'colorscheme': 'darcula',	
       \ }
 " Transparecy
 " autocmd VimEnter * call SetupLightlineColors()
