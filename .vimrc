@@ -75,7 +75,7 @@ exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS>
 
 " Nerdtree settings
 " Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+autocmd VimEnter * NERDTree
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 nnoremap <C-s> :NERDTreeToggle<Enter>
 
@@ -104,6 +104,8 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()"
 
+" Enables lightline on single file
+set laststatus=2
 " Lightline settings
 " colorscheme
 let g:lightline = {
@@ -121,3 +123,6 @@ let g:lightline = {
 " 
 "   call lightline#colorscheme()
 " endfunction
+"
+" Youcompleteme settings
+nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
