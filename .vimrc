@@ -53,6 +53,10 @@ if has('syntax') && has('eval')
 endif
 
 " My Stuff
+" Horizontal scroll
+set nowrap
+" Reload vims configuration file
+nnoremap <Leader>r :source ~/.vimrc<CR>
 " Shortcuts
 map <C-h> <C-w>h
 map <C-j> <C-w>j
