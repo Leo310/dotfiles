@@ -157,3 +157,6 @@ set clipboard=unnamed
 
 " No Highlight
 nnoremap <Leader>h :noh <cr>
+
+" Makes vim transparent
+" hi Normal guibg=NONE ctermbg=NONE

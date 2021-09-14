@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=MySHiet
+ColorScheme=Dracula
 Font=Noto Mono,12,-1,0,50,0,0,0,0,0
 
 [Cursor Options]
