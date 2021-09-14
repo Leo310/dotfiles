@@ -132,6 +132,21 @@ if ! shopt -oq posix; then
   fi
 fi
 
+KONSOLE_INSTANCES=0
+for pid in $(pidof -x konsole); do
+	KONSOLE_INSTANCES=$((KONSOLE_INSTANCES+1))
+done
+
+TMUX_INSTANCES=0
+for pid in $(pidof -x tmux); do
+	TMUX_INSTANCES=$((TMUX_INSTANCES+1))
+done
+
+if [ $KONSOLE_INSTANCES -le 1 ] && [ $TMUX_INSTANCES -le 1 ]; then
+	neofetch
+fi
+
+set -o vi
+
 source /usr/share/nvm/init-nvm.sh
-neofetch
 . ~/z.sh

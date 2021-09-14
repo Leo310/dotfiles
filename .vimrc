@@ -74,7 +74,7 @@ colorscheme dracula
 " Session settings
 let g:sessions_dir = '~/.vim/sessions'
 exec 'nnoremap <Leader>ss :NERDTreeClose \| :mksession! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
-exec 'nnoremap <Leader>sr :bufdo bd \| :so ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+exec 'nnoremap <Leader>sr :wa \| :bufdo bd \| :so ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
 " Nerdtree settings
@@ -113,7 +113,7 @@ set laststatus=2
 " Lightline settings
 " colorscheme
 let g:lightline = {
-	\ 'colorscheme': 'darcula',	
+	\ 'colorscheme': 'Tomorrow_Night_Blue',	
       \ }
 " Transparecy
 " autocmd VimEnter * call SetupLightlineColors()
@@ -130,3 +130,30 @@ let g:lightline = {
 "
 " Youcompleteme settings
 nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" Auto Bracket closing
+" inoremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>0
+" inoremap {;<CR> {<CR>};<ESC>0
+"
+" Save easier
+nnoremap zz :w<cr>
+" and goto cursor and Insert mod
+" inoremap zz <ESC>:w<cr>gi
+inoremap zz <ESC>:w<cr>
+
+"Youcompleteme dont open split window  with function completion 
+set completeopt-=preview
+
+" Encoding
+set encoding=utf-8
+
+" Clipboard
+set clipboard=unnamed
+
+" No Highlight
+nnoremap <Leader>h :noh <cr>
