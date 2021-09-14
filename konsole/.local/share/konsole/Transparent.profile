@@ -4,7 +4,7 @@ Font=Noto Mono,12,-1,0,50,0,0,0,0,0
 
 [Cursor Options]
 CursorShape=0
-CustomCursorColor=255,0,4
+CustomCursorColor=255,0,90
 CustomCursorTextColor=0,0,0
 UseCustomCursorColor=true
 
