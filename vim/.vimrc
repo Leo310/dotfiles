@@ -53,6 +53,7 @@ if has('syntax') && has('eval')
 endif
 
 " My Stuff
+let mapleader = " " " map leader to Space
 " Horizontal scroll
 set nowrap
 " Reload vims configuration file
@@ -114,7 +115,14 @@ set laststatus=2
 " colorscheme
 let g:lightline = {
 	\ 'colorscheme': 'Tomorrow_Night_Blue',	
-      \ }
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+	\ },
+	\ 'component_function': {
+      	\   'gitbranch': 'FugitiveHead'
+      	\ },
+\ }
 " Transparecy
 " autocmd VimEnter * call SetupLightlineColors()
 " function SetupLightlineColors() abort
@@ -157,6 +165,11 @@ set clipboard=unnamed
 
 " No Highlight
 nnoremap <Leader>h :noh <cr>
+
+"Git fugitiv plugin maps
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gs :G<CR>
 
 " Makes vim transparent
 " hi Normal guibg=NONE ctermbg=NONE
