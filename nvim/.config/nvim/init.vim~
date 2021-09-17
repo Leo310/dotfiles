@@ -16,7 +16,7 @@
 if v:progname =~? "evim"
   finish
 endif
-
+cmon
 " Get the defaults that most users want.
 source $VIMRUNTIME/defaults.vim
 
@@ -52,6 +52,37 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
+call plug#begin()
+Plug 'scrooloose/nerdtree-project-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'itchyny/lightline.vim'
+
+" NERDTree
+
+Plug 'scrooloose/nerdtree'
+
+
+" Git integration
+
+Plug 'tpope/vim-fugitive'
+
+" Linting
+
+" Snippets
+
+" Comments
+
+Plug 'tpope/vim-commentary'
+
+" Themes
+
+Plug 'dracula/vim' , {'as': 'dracula'}
+
+call plug#end() 
+
 " My Stuff
 let mapleader = " " " map leader to Space
 " Horizontal scroll
@@ -63,10 +94,6 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-" Sets vim colorscheme
-packadd! dracula
-colorscheme dracula
 
 " Sets line numbers
 :set nu

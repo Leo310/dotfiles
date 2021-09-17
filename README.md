@@ -27,6 +27,8 @@ cd ~/dotfiles
 ```
 
 # Programs I want to install on new system
+tmux
+tpm (tmux package manager)
 vim
 vim plugins
 YouCompleteMe
