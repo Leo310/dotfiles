@@ -27,6 +27,7 @@ cd ~/dotfiles
 ```
 
 # Programs I want to install on new system
+vim-plug
 tmux
 tpm (tmux package manager)
 vim

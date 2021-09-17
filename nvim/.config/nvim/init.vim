@@ -142,5 +142,10 @@ set encoding=utf-8
 " Clipboard
 set clipboard=unnamed
 
+"Git fugitiv plugin maps
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gs :G<CR>
+
 " No Highlight
 nnoremap <Leader>h :noh <cr>
