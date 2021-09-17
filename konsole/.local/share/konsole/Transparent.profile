@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=Dracula
-Font=Noto Mono,12,-1,0,50,0,0,0,0,0
+Font=NotoMono Nerd Font Mono,12,-1,5,50,0,0,0,0,0
 
 [Cursor Options]
 CursorShape=0
@@ -9,6 +9,7 @@ CustomCursorTextColor=0,0,0
 UseCustomCursorColor=true
 
 [General]
+Environment=TERM=xterm-256color,COLORTERM=truecolor
 Name=Transparent
 Parent=FALLBACK/
 
