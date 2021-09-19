@@ -1,4 +1,4 @@
-#TODO
+# TODO
 making installer script which runs stow on all directories
 
 # Installation

@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'ryanoasis/vim-devicons'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
+Plug 'vimwiki/vimwiki'
 
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
@@ -31,6 +32,7 @@ Plug 'tpope/vim-commentary'
 Plug 'dracula/vim' , {'as': 'dracula'}
 
 call plug#end() 
+
 
 " My Stuff
 " colorscheme set to 0 to have transparent in transparent terminal
