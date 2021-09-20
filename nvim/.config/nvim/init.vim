@@ -39,9 +39,13 @@ call plug#end()
 let g:dracula_colorterm = 0
 colorscheme dracula
 
+" vimwiki stuff
 hi link VimwikiLink DraculaLink
 hi link VimwikiHeader1 WildMenu 
 hi link VimwikiHeader2 DraculaGreenBold
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let mapleader = " " " map leader to Space
 " Horizontal scroll
