@@ -103,7 +103,14 @@ set laststatus=2
 " colorscheme
 let g:lightline = {
 	\ 'colorscheme': 'Tomorrow_Night_Blue',	
-      \ }
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+	\ },
+	\ 'component_function': {
+      	\   'gitbranch': 'FugitiveHead'
+      	\ },
+\ }
 " Transparecy
 " autocmd VimEnter * call SetupLightlineColors()
 " function SetupLightlineColors() abort
