@@ -39,6 +39,10 @@ call plug#end()
 let g:dracula_colorterm = 0
 colorscheme dracula
 
+hi link VimwikiLink DraculaLink
+hi link VimwikiHeader1 WildMenu 
+hi link VimwikiHeader2 DraculaGreenBold
+
 let mapleader = " " " map leader to Space
 " Horizontal scroll
 set nowrap
@@ -61,7 +65,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 :set rnu
 
 " Session settings
-let g:sessions_dir = '~/.vim/sessions'
+let g:sessions_dir = '~/.config/nvim/sessions'
 exec 'nnoremap <Leader>ss :NERDTreeClose \| :mksession! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 exec 'nnoremap <Leader>sr :wa \| :bufdo bd \| :so ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
