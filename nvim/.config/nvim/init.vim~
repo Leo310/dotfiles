@@ -44,14 +44,14 @@ hi link VimwikiLink DraculaLink
 hi link VimwikiHeader1 WildMenu 
 hi link VimwikiHeader2 DraculaGreenBold
 
-let g:vimwiki_list = [{'path': '~/OneDrive/Documents/vim/vimwiki',
+let g:vimwiki_list = [{'path': '~/OneDrive/Documents/vim',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let mapleader = " " " map leader to Space
 " Horizontal scroll
 set nowrap
 " Reload vims configuration file
-nnoremap <Leader>r :source ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>r :source ~/.vimrc<CR>
 " Shortcuts
 map <C-h> <C-w>h
 map <C-j> <C-w>j
