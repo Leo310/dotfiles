@@ -15,6 +15,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdtree-project-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
+" LSP
+Plug 'neovim/nvim-lspconfig'
+
 " Git integration
 
 Plug 'tpope/vim-fugitive'
