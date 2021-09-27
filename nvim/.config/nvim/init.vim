@@ -4,6 +4,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'itchyny/lightline.vim'
 Plug 'vimwiki/vimwiki'
 
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -38,6 +40,22 @@ call plug#end()
 
 
 " My Stuff
+" LSP go stuff
+lua require('lsp_config')
+autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
+autocmd BufWritePre *.go lua goimports(1000)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_fields = 1
+
+" Tab space
+set smartindent
+set tabstop=4
+set shiftwidth=4
+" set expandtab " converts tabs to spaces
+
 " colorscheme set to 0 to have transparent in transparent terminal
 let g:dracula_colorterm = 0
 colorscheme dracula
@@ -136,8 +154,6 @@ let g:lightline = {
 "   call lightline#colorscheme()
 " endfunction
 "
-" Youcompleteme settings
-nnoremap gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " Auto Bracket closing
 " inoremap " ""<left>
@@ -153,9 +169,6 @@ nnoremap zz :w<cr>
 " and goto cursor and Insert mod
 " inoremap zz <ESC>:w<cr>gi
 inoremap zz <ESC>:w<cr>
-
-"Youcompleteme dont open split window  with function completion 
-set completeopt-=preview
 
 " Encoding
 set encoding=utf-8
