@@ -82,7 +82,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " Telescope
-lua require('telescope')
+lua require('mytelescope')
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
