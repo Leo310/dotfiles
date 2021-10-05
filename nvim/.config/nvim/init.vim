@@ -1,40 +1,44 @@
+" Plugins
 call plug#begin()
-Plug 'ryanoasis/vim-devicons'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'itchyny/lightline.vim'
-Plug 'vimwiki/vimwiki'
 
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Telescope
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+	" Golang setup
+	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" NERDTree
+	" Telescope
+	Plug 'nvim-lua/plenary.nvim'
+	Plug 'nvim-telescope/telescope.nvim'
+	Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
-Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdtree-project-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+	" LSP
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'hrsh7th/cmp-buffer'
+	Plug 'hrsh7th/nvim-cmp'
 
-" LSP
-Plug 'neovim/nvim-lspconfig'
+	" Git integration
+	Plug 'tpope/vim-fugitive'
 
-" Git integration
+	" Comments
+	Plug 'tpope/vim-commentary'
 
-Plug 'tpope/vim-fugitive'
+	" Colorscheme
+	Plug 'dracula/vim' , {'as': 'dracula'}
+	
+	" Line
+	Plug 'itchyny/lightline.vim'
+	
+	" NERDTree
+	Plug 'scrooloose/nerdtree'
+	Plug 'scrooloose/nerdtree-project-plugin'
+	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+	Plug 'ryanoasis/vim-devicons'
 
-" Linting
+	" Tmux
+	Plug 'christoomey/vim-tmux-navigator'
 
-" Snippets
-
-" Comments
-
-Plug 'tpope/vim-commentary'
-
-" Themes
-
-Plug 'dracula/vim' , {'as': 'dracula'}
+	" Docs
+	Plug 'vimwiki/vimwiki'
+	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 call plug#end() 
 
@@ -44,6 +48,7 @@ call plug#end()
 lua require('lsp_config')
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua goimports(1000)
+set completeopt=menu,menuone,noselect
 
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
