@@ -14,6 +14,9 @@ call plug#begin()
 	Plug 'hrsh7th/cmp-nvim-lsp'
 	Plug 'hrsh7th/cmp-buffer'
 	Plug 'hrsh7th/nvim-cmp'
+	" Vsnip
+	Plug 'hrsh7th/vim-vsnip'
+	Plug 'hrsh7th/cmp-vsnip'
 
 	" Git integration
 	Plug 'tpope/vim-fugitive'
