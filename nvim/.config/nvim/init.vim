@@ -111,7 +111,7 @@ exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS>
 
 " Nerdtree settings
 " Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree
+autocmd VimEnter * NERDTree | wincmd p
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 nnoremap <C-s> :NERDTreeToggle<Enter>
 
