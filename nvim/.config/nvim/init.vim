@@ -60,6 +60,15 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_rename_command = 'gopls'
 
+" Bracket completion
+inoremap {{ {<CR>}<ESC>O
+inoremap { {}<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap " ""<ESC>i
+inoremap ' ''<ESC>i
+inoremap ` ``<ESC>i
+
 " Tab space
 set smartindent
 set tabstop=4
