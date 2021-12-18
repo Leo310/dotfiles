@@ -31,8 +31,8 @@ call plug#begin()
 	Plug 'itchyny/lightline.vim'
 	
 	" NERDTree
-	Plug 'scrooloose/nerdtree'
-	Plug 'scrooloose/nerdtree-project-plugin'
+	Plug 'preservim/nerdtree'
+	" Plug 'scrooloose/nerdtree-project-plugin'
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plug 'ryanoasis/vim-devicons'
 
