@@ -1,9 +1,6 @@
 " Plugins
 call plug#begin()
 
-	" Golang setup
-	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
 	" Telescope
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim'
@@ -18,6 +15,13 @@ call plug#begin()
 	Plug 'hrsh7th/vim-vsnip'
 	Plug 'hrsh7th/cmp-vsnip'
 
+	" Golang setup
+	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+	" Typescript setup
+	Plug 'jose-elias-alvarez/null-ls.nvim'
+	Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+	
 	" Git integration
 	Plug 'tpope/vim-fugitive'
 
@@ -32,7 +36,6 @@ call plug#begin()
 	
 	" NERDTree
 	Plug 'preservim/nerdtree'
-	" Plug 'scrooloose/nerdtree-project-plugin'
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 	Plug 'ryanoasis/vim-devicons'
 
