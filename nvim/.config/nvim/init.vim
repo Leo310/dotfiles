@@ -9,6 +9,10 @@ call plug#begin()
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
+	" Treesitter
+	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+	Plug 'nvim-treesitter/playground'
+
 	" LSP
 	Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/cmp-nvim-lsp'
@@ -47,17 +51,22 @@ call plug#end()
 
 
 " My Stuff
+
+" Treesitter
+lua require('treesitter')
+
 " LSP go stuff
 lua require('lsp_config')
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua goimports(1000)
 set completeopt=menu,menuone,noselect
 
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
+" Treesitter does everything now
+" let g:go_highlight_functions = 1
+" let g:go_highlight_function_calls = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_fields = 1
+" let g:go_highlight_types = 1
 let g:go_rename_command = 'gopls'
 
 " Bracket completion
@@ -85,7 +94,7 @@ hi link VimwikiHeader1 WildMenu
 hi link VimwikiHeader2 DraculaGreenBold
 hi link VimwikiList DiffChange 
 
-let g:vimwiki_list = [{'path': '~/OneDrive/Documents/vim/vimwiki',
+let g:vimwiki_list = [{'path': '/run/media/leo/BigAssDisk/OneDrive/Documents/vim/vimwiki',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let mapleader = " " " map leader to Space
@@ -107,6 +116,8 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>t <cmd>Telescope treesitter<cr>
+nnoremap <leader>wd <cmd>Telescope lsp_workspace_diagnostics<cr>
 
 " Sets line numbers
 :set nu
