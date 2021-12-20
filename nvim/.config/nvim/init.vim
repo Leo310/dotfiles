@@ -88,7 +88,7 @@ hi link VimwikiHeader1 WildMenu
 hi link VimwikiHeader2 DraculaGreenBold
 hi link VimwikiList DiffChange 
 
-let g:vimwiki_list = [{'path': '~/OneDrive/Documents/vim/vimwiki',
+let g:vimwiki_list = [{'path': '$ONEDRIVEPATH/Documents/vim/vimwiki',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let mapleader = " " " map leader to Space

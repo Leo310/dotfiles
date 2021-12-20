@@ -4,5 +4,7 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-export GOPATH=~/GOworkspace
+export GOPATH=<Workspace path>
 export PATH=$PATH:$GOPATH/bin
+
+export ONEDRIVEPATH=<Onedrive path>
