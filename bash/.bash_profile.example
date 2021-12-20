@@ -1,0 +1,10 @@
+#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+export GOPATH=<Workspace path>
+export PATH=$PATH:$GOPATH/bin
+
+export ONEDRIVEPATH=<Onedrive path>
