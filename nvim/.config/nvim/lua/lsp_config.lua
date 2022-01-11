@@ -114,7 +114,7 @@ nvim_lsp.gopls.setup{
 	on_attach = on_attach,
 }
 
-  function goimports(timeoutms)
+function goimports(timeoutms)
 	local context = { source = { organizeImports = true } }
 	vim.validate { context = { context, "t", true } }
 
@@ -142,7 +142,7 @@ nvim_lsp.gopls.setup{
 	else
 	  vim.lsp.buf.execute_command(action)
 	end
-  end
+end
 
 --vim.lsp.set_log_level("debug")_
 
