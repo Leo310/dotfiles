@@ -70,7 +70,6 @@ if [ "$color_prompt" = yes ]; then
 	prompt_symbol=👽
     fi
 	if [ -n "$SSH_CLIENT" ]; then text=" ssh"
-
 	fi
 	PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u${prompt_symbol}\h'$prompt_color')$(parse_git_branch)-[\[\033[0;1m\]\w'$prompt_color']${text}\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
     # BackTrack red prompt
@@ -88,6 +87,8 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+# different color in ssh shell
+alias ssh='konsoleprofile colors=Ssh; ssh'
 
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
