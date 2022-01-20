@@ -16,6 +16,9 @@ require('telescope').setup({
 					["<C-n>"] = actions.preview_scrolling_down,
 			},
 		},
+		file_ignore_patterns = {
+			".git"
+		}
       },
 	  pickers = {
 		  find_files = {
