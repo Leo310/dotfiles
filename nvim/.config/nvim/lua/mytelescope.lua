@@ -20,9 +20,7 @@ require('telescope').setup({
 	  pickers = {
 		  find_files = {
 			  hidden = true
-		  }
-	  },
-	  pickers = {
+		  },
 		  file_browser = {
 			  hidden = true
 		  }
