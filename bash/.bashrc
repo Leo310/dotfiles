@@ -87,8 +87,22 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
 # different color in ssh shell
-alias ssh='konsoleprofile colors=Ssh; ssh'
+myssh() {
+	if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+		# in tmux
+		printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Ssh"
+		ssh $1
+		printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Dracula"
+	else
+		# not in tmux
+		konsoleprofile colors=Ssh
+		ssh $1
+		konsoleprofile colors=Dracula
+	fi
+}
+alias ssh='myssh'
 
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
