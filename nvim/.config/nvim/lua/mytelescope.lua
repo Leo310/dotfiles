@@ -22,6 +22,11 @@ require('telescope').setup({
 			  hidden = true
 		  }
 	  },
+	  pickers = {
+		  file_browser = {
+			  hidden = true
+		  }
+	  },
 	  extensions = {
 		  fzy_native = {
 			  override_generic_sorter = false,
