@@ -10,5 +10,5 @@ is_app_installed() {
 buf=$(cat "$@")
 
 if is_app_installed xclip; then
-	echo $buf | xclip -sel clip -i &>/dev/null; tmux display-message "Tmux buffer saved to clipboard"
+	echo $buf | xclip -sel clip -i &>/dev/null
 fi

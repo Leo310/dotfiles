@@ -6,4 +6,4 @@ set -eu
 buf=$(cat "$@")
 
 # some nc need -c flag to close instantly after connection 
-echo $buf | nc -q0 localhost 5556; tmux display-message "Tmux buffer saved to clipboard"
+echo $buf | nc -q0 localhost 5556

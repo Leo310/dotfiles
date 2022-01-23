@@ -98,9 +98,7 @@ myssh() {
 		# in tmux
 		printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Ssh"
 		# remote clipboard
-		export REMOTECOPYPORT=5556
-		while (true); do nc -l -p $REMOTECOPYPORT | xclip -i -sel clip ; done &
-		ssh $1 -R $REMOTECOPYPORT:localhost:$REMOTECOPYPORT
+		ssh $1 -R 5556:localhost:5556
 		printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Dracula"
 	else
 		# not in tmux
