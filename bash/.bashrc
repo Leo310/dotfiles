@@ -88,16 +88,19 @@ xterm*|rxvt*)
     ;;
 esac
 
-# auto exec tmux
+# auto exec tmux and neofetch
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux
+	exec tmux
 fi
 # different color in ssh shell
 myssh() {
 	if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
 		# in tmux
 		printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Ssh"
-		ssh $1
+		# remote clipboard
+		export REMOTECOPYPORT=5556
+		while (true); do nc -l -p $REMOTECOPYPORT | xclip -i -sel clip ; done &
+		ssh $1 -R $REMOTECOPYPORT:localhost:$REMOTECOPYPORT
 		printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Dracula"
 	else
 		# not in tmux
@@ -107,6 +110,21 @@ myssh() {
 	fi
 }
 alias ssh='myssh'
+
+# start neofetch
+KONSOLE_INSTANCES=0
+for pid in $(pidof -x konsole); do
+	KONSOLE_INSTANCES=$((KONSOLE_INSTANCES+1))
+done
+
+TMUX_INSTANCES=0
+for pid in $(pidof -x tmux); do
+	TMUX_INSTANCES=$((TMUX_INSTANCES+1))
+done
+
+if [ $KONSOLE_INSTANCES -le 1 ] && [ $TMUX_INSTANCES -le 2 ]; then
+	neofetch
+fi
 
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -158,19 +176,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-KONSOLE_INSTANCES=0
-for pid in $(pidof -x konsole); do
-	KONSOLE_INSTANCES=$((KONSOLE_INSTANCES+1))
-done
-
-TMUX_INSTANCES=0
-for pid in $(pidof -x tmux); do
-	TMUX_INSTANCES=$((TMUX_INSTANCES+1))
-done
-
-if [ $KONSOLE_INSTANCES -le 1 ] && [ $TMUX_INSTANCES -le 1 ]; then
-	neofetch
-fi
 
 set -o vi
 if command -v nvm &> /dev/null

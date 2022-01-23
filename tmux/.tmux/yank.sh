@@ -2,12 +2,13 @@
 
 set -eu
 
-# is_app_installed() {
-#   type "$1" &>/dev/null
-# }
+is_app_installed() {
+  type "$1" &>/dev/null
+}
 
 # get data either form stdin or from file. "$@" returns array of every argument
 buf=$(cat "$@")
 
-# some nc need -c flag to close instantly after connection 
-echo $buf | xclip -sel clip -i
+if is_app_installed xclip; then
+	echo $buf | xclip -sel clip -i &>/dev/null; tmux display-message "Tmux buffer saved to clipboard"
+fi
