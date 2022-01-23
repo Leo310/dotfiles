@@ -88,6 +88,10 @@ xterm*|rxvt*)
     ;;
 esac
 
+# auto exec tmux
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
 # different color in ssh shell
 myssh() {
 	if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
