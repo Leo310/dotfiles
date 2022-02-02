@@ -83,8 +83,8 @@ inoremap ` ``<ESC>i
 
 " Tab space
 set smartindent
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 " set expandtab " converts tabs to spaces
 
 " colorscheme set to 0 to have transparent in transparent terminal
