@@ -109,7 +109,22 @@ nnoremap <Leader>r :source ~/.config/nvim/init.vim<CR>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
-map <C-l> <C-w>l
+" make vim resize like tmux
+func! Resize(dir, count) abort
+    if winnr('$') == 1 | return | endif
+    let dir = a:dir
+    if winnr() == winnr('$')
+        let dir = !dir
+    endif
+    let cmd_dir = dir ? '+' : '-'
+    exe "vert resize ". cmd_dir . a:count
+endfunc
+map <C-M-l> :<C-u>call Resize(1, 5)<CR>
+map <C-M-h> :<C-u>call Resize(0, 5)<CR>
+" map <C-M-h> 5<C-w><
+" map <C-M-j> 5<C-w>+
+" map <C-M-k> 5<C-w>-
+" map <C-M-l> 5<C-w>>
 
 " Telescope
 lua require('mytelescope')
