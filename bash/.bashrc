@@ -4,7 +4,7 @@
 # ====  General Settings ===
 # ==========================
 
-# If not running interactively, don't do anything. Only for ssh and remote shiet
+# $- prints the current set of options in your current shell. If not running interactively, don't do anything. Only for ssh and remote shiet
 case $- in
     *i*) ;;
       *) return;;
@@ -76,11 +76,12 @@ if [ "$color_prompt" = yes ]; then
     info_color='\[\033[1;34m\]'
     prompt_symbol=😈
     if [ "$EUID" -eq 0 ]; then # Change prompt colors for root user
-	prompt_color='\[\033[;94m\]'
-	info_color='\[\033[1;31m\]'
-	prompt_symbol=👽
+      prompt_color='\[\033[;94m\]'
+      info_color='\[\033[1;31m\]'
+      prompt_symbol=👽
     fi
-	if [ -n "$SSH_CLIENT" ]; then text=" ssh"
+	if [ -n "$SSH_CLIENT" ]; then 
+    text=" ssh"
 	fi
 	PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u${prompt_symbol}\h'$prompt_color')$(parse_git_branch)-[\[\033[0;1m\]\w'$prompt_color']${text}\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
     # BackTrack red prompt

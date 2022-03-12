@@ -85,7 +85,7 @@ inoremap ` ``<ESC>i
 set smartindent
 set tabstop=2
 set shiftwidth=2
-" set expandtab " converts tabs to spaces
+set expandtab " converts tabs to spaces
 
 " colorscheme set to 0 to have transparent in transparent terminal
 let g:dracula_colorterm = 0
