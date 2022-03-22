@@ -19,6 +19,9 @@ call plug#begin()
 	Plug 'hrsh7th/vim-vsnip'
 	Plug 'hrsh7th/cmp-vsnip'
 
+  " Python
+  Plug 'davidhalter/jedi-vim'
+
 	" Golang setup
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
@@ -85,7 +88,11 @@ inoremap ` ``<ESC>i
 set smartindent
 set tabstop=2
 set shiftwidth=2
-set expandtab " converts tabs to spaces
+" set expandtab " converts tabs to spaces
+augroup FileTypeSpecificAutocommands
+    autocmd FileType javascript setlocal expandtab
+    autocmd FileType typescript setlocal expandtab
+augroup END
 
 " colorscheme set to 0 to have transparent in transparent terminal
 let g:dracula_colorterm = 0
