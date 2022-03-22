@@ -98,19 +98,29 @@ end
 
 -- python
 require'lspconfig'.pylsp.setup{
-    cmd = { "pylsp" },
-    filetypes = { "python" },
-    -- root_dir = function(fname)
-    --       local root_files = {
-    --         'pyproject.toml',
-    --         'setup.py',
-    --         'setup.cfg',
-    --         'requirements.txt',
-    --         'Pipfile',
-    --       }
-    --       return util.root_pattern(unpack(root_files))(fname) or util.find_git_ancestor(fname)
-    --     end,
-    -- single_file_support = true
+	cmd = { "pylsp" },
+	filetypes = { "python" },
+	settings = {
+		pylsp = {
+			plugins = {
+				flake8 = {
+					enabled = false,
+					-- "exclude": [],
+					-- "hangClosing": false,
+					-- ignore = {"E501"},
+					maxLineLength = 100,
+					-- indentSize = 245,
+					-- "perFileIgnores": [],
+					-- "select": []
+				},
+				pycodestyle = {
+					maxLineLength = 100,
+				}
+			},
+		}
+	},
+	-- root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "Pipfile", "requirements.txt"),
+	single_file_support = true,
 	on_attach = on_attach,
 }
 
@@ -119,16 +129,16 @@ nvim_lsp.gopls.setup{
 	cmd = {'gopls'},
 	-- for postfix snippets and analyzers
 	capabilities = capabilities,
-	    settings = {
-	      gopls = {
-		      experimentalPostfixCompletions = true,
-		      analyses = {
-		        unusedparams = true,
-		        shadow = true,
-		     },
-		     staticcheck = true,
-		    },
-	    },
+	settings = {
+		gopls = {
+			experimentalPostfixCompletions = true,
+			analyses = {
+				unusedparams = true,
+				shadow = true,
+		 },
+		 staticcheck = true,
+		},
+	},
 	on_attach = on_attach,
 }
 
