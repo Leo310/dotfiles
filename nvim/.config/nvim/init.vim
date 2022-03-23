@@ -159,6 +159,7 @@ exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS>
 autocmd VimEnter * NERDTree | NERDTreeToggle
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 nnoremap <C-s> :NERDTreeToggle<Enter>
+let NERDTreeIgnore = ['__pycache__']
 
 " Closing on file opening
 let NERDTreeQuitOnOpen = 1
@@ -196,9 +197,13 @@ let g:lightline = {
 	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
 	\ },
 	\ 'component_function': {
-      	\   'gitbranch': 'FugitiveHead'
+      	\   'gitbranch': 'FugitiveHead',
+				\		'filename': 'LightlineFilename'
       	\ },
 \ }
+function! LightlineFilename()
+	return expand('%')
+endfunction
 " Transparecy
 " autocmd VimEnter * call SetupLightlineColors()
 " function SetupLightlineColors() abort
