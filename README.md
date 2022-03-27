@@ -1,6 +1,3 @@
-# TODO
-making installer script which runs stow on all directories
-
 # Installation
 ### Download and change folder
 ```
@@ -9,9 +6,9 @@ git clone https://github.com/Leo310/dotfiles.git
 
 cd dotfiles
 ```
-### Run install (using stow)
+### Run install (prerequisites: stow)
 ```
-./install.sh
+./install
 ```
 
 # Uninstallation
@@ -23,25 +20,5 @@ cd ~/dotfiles
 
 ### Run uninstaller (same as installer)
 ```
-./install.sh
+./uninstall
 ```
-
-# Programs I want to install on new system
-vim-plug
-tmux
-tpm (tmux package manager)
-vim
-vim plugins
-YouCompleteMe
-mysqlcli
-tor browser
-discord
-telegram
-whatsapp web
-teams
-spotify
-chrome
-nvm
-docker
-radare2
-cmake (build tools)

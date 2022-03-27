@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if command -v stow &> /dev/null
+then
+	echo "Unstows every package"
+	for package in $(ls -d */)
+	do
+		stow -D $package &> /dev/null
+	done
+else
+	echo "You need to install stow to run this script."
+fi
