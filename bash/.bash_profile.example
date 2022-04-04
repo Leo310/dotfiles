@@ -7,4 +7,5 @@
 export GOPATH=<Workspace path>
 export PATH=$PATH:$GOPATH/bin
 
+# you also need to specify it in onedrive-sync script. this isnt exported for cronjobs
 export ONEDRIVEPATH=<Onedrive path>

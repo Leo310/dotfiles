@@ -52,6 +52,8 @@ call plug#begin()
 	" Docs
 	Plug 'vimwiki/vimwiki'
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+	Plug 'lervag/vimtex'
+	Plug 'lewis6991/spellsitter.nvim'
 
 call plug#end() 
 
@@ -108,6 +110,7 @@ let g:vimwiki_list = [{'path': '$ONEDRIVEPATH/Documents/vim/vimwiki',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let mapleader = " " " map leader to Space
+let maplocalleader = " " " filetype specifc leader key
 " Horizontal scroll
 set nowrap
 " Reload vims configuration file
@@ -154,6 +157,11 @@ let g:sessions_dir = '~/.config/nvim/sessions'
 exec 'nnoremap <Leader>ss :NERDTreeClose \| :mksession! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 exec 'nnoremap <Leader>sr :wa \| :bufdo bd \| :so ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
+
+" Vimtex settings
+let g:vimtex_view_general_viewer = 'okular'
+" Spellcheck
+set spell spelllang=en_us,de_de
 
 " Nerdtree settings
 autocmd VimEnter * NERDTree | NERDTreeToggle

@@ -124,6 +124,23 @@ require'lspconfig'.pylsp.setup{
 	on_attach = on_attach,
 }
 
+-- Latex setup
+require'lspconfig'.ltex.setup{
+	cmd = {'texlab'},
+	filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" },
+	settings = {
+	},
+	root_dir = nvim_lsp.util.root_pattern("main.tex"),
+	on_attach = on_attach,
+	single_file_support = true,
+}
+
+-- Spellcheck on top of native
+require('spellsitter').setup {
+  enable = true,
+	filetypes = {"tex"},
+}
+
 -- GO setup
 nvim_lsp.gopls.setup{
 	cmd = {'gopls'},
