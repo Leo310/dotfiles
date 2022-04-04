@@ -141,6 +141,14 @@ require('spellsitter').setup {
 	filetypes = {"tex"},
 }
 
+-- Java setup
+require'lspconfig'.jdtls.setup{
+	cmd = {"jdtls"},
+	filetypes = {"java"},
+	on_attach = on_attach,
+	single_file_support = true,
+}
+
 -- GO setup
 nvim_lsp.gopls.setup{
 	cmd = {'gopls'},
