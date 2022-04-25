@@ -94,6 +94,8 @@ set shiftwidth=2
 augroup FileTypeSpecificAutocommands
     autocmd FileType javascript setlocal expandtab
     autocmd FileType typescript setlocal expandtab
+		" Spellcheck
+		autocmd FileType tex set spell spelllang=en_us,de_de
 augroup END
 
 " colorscheme set to 0 to have transparent in transparent terminal
@@ -160,8 +162,6 @@ exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS>
 
 " Vimtex settings
 let g:vimtex_view_general_viewer = 'okular'
-" Spellcheck
-set spell spelllang=en_us,de_de
 
 " Nerdtree settings
 autocmd VimEnter * NERDTree | NERDTreeToggle
