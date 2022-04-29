@@ -58,7 +58,8 @@ call plug#begin()
 call plug#end() 
 
 
-" My Stuff
+" enable mouse in all modes
+set mouse=a
 
 " Treesitter
 lua require('treesitter')
