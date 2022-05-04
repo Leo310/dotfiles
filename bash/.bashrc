@@ -38,6 +38,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # git autocompletion
 source /usr/share/bash-completion/completions/git
 
+export VISUAL=nvim
+export EDITOR=nvim
 
 # ==========================
 # ========  Prompt =========
