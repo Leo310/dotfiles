@@ -1,6 +1,5 @@
 " Plugins
 call plug#begin()
-
 	" Telescope
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim'
@@ -55,8 +54,14 @@ call plug#begin()
 	Plug 'lervag/vimtex'
 	Plug 'lewis6991/spellsitter.nvim'
 
+	" utils
+	" Bracket completion
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'luochen1990/rainbow'
 call plug#end() 
 
+" Rainbow Plugin
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 " enable mouse in all modes
 set mouse=a
@@ -79,13 +84,16 @@ set completeopt=menu,menuone,noselect
 let g:go_rename_command = 'gopls'
 
 " Bracket completion
-inoremap {{ {<CR>}<ESC>O
-inoremap { {}<ESC>i
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap " ""<ESC>i
-inoremap ' ''<ESC>i
-inoremap ` ``<ESC>i
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
+" inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+" inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+" inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+" inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+" inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
 
 " Tab space
 set smartindent

@@ -119,7 +119,7 @@ require'lspconfig'.pylsp.setup{
 			},
 		}
 	},
-	-- root_dir = util.root_pattern("pyproject.toml", "setup.py", "setup.cfg", "Pipfile", "requirements.txt"),
+	root_dir = nvim_lsp.util.root_pattern("venv", "pyproject.toml", "setup.py", "setup.cfg", "Pipfile", "requirements.txt"),
 	single_file_support = true,
 	on_attach = on_attach,
 }
