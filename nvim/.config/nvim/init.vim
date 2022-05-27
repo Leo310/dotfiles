@@ -4,6 +4,7 @@ call plug#begin()
 	Plug 'nvim-lua/plenary.nvim'
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 	" Treesitter
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -18,7 +19,7 @@ call plug#begin()
 	Plug 'hrsh7th/vim-vsnip'
 	Plug 'hrsh7th/cmp-vsnip'
 
-  " Python
+	" Python
   Plug 'davidhalter/jedi-vim'
 
 	" Golang setup
@@ -28,6 +29,9 @@ call plug#begin()
 	Plug 'jose-elias-alvarez/null-ls.nvim'
 	Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 	
+	" Java setup
+	Plug 'mfussenegger/nvim-jdtls'
+
 	" Git integration
 	Plug 'tpope/vim-fugitive'
 
@@ -61,7 +65,7 @@ call plug#begin()
 call plug#end() 
 
 " Rainbow Plugin
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 0 "set to 0 if you want to enable it later via :RainbowToggle
 
 " enable mouse in all modes
 set mouse=a
@@ -103,9 +107,16 @@ set shiftwidth=2
 augroup FileTypeSpecificAutocommands
     autocmd FileType javascript setlocal expandtab
     autocmd FileType typescript setlocal expandtab
+    autocmd FileType java call SetJavaOptions()
 		" Spellcheck
 		autocmd FileType tex set spell spelllang=en_us,de_de
 augroup END
+
+function SetJavaOptions()
+		setlocal expandtab
+		setlocal shiftwidth=4
+		setlocal softtabstop=4
+endfunction
 
 " colorscheme set to 0 to have transparent in transparent terminal
 let g:dracula_colorterm = 0
