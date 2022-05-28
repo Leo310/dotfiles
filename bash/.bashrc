@@ -41,6 +41,8 @@ source /usr/share/bash-completion/completions/git
 export VISUAL=nvim
 export EDITOR=nvim
 
+alias tmux='tmux -2' # forces tmux to use full 256 colors
+
 # ==========================
 # ========  Prompt =========
 # ==========================
@@ -170,4 +172,3 @@ if [ -x /usr/bin/dircolors ]; then
     export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
     export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 fi
-

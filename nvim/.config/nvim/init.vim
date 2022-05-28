@@ -12,23 +12,23 @@ call plug#begin()
 
 	" LSP
 	Plug 'neovim/nvim-lspconfig'
+	" completion
 	Plug 'hrsh7th/cmp-nvim-lsp'
 	Plug 'hrsh7th/cmp-buffer'
 	Plug 'hrsh7th/nvim-cmp'
+	Plug 'onsails/lspkind.nvim' " icons of functions. can also define own icons (lookup nvim-cmp wiki -> cuztomize appearance)
 	" Vsnip
 	Plug 'hrsh7th/vim-vsnip'
 	Plug 'hrsh7th/cmp-vsnip'
 
 	" Python
-  Plug 'davidhalter/jedi-vim'
 
 	" Golang setup
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 	" Typescript setup
-	Plug 'jose-elias-alvarez/null-ls.nvim'
 	Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-	
+
 	" Java setup
 	Plug 'mfussenegger/nvim-jdtls'
 
@@ -73,6 +73,9 @@ set mouse=a
 " Treesitter
 lua require('treesitter')
 
+" completion menu and mappings
+lua require('completion')
+
 " LSP go stuff
 lua require('lsp_config')
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
@@ -86,18 +89,6 @@ set completeopt=menu,menuone,noselect
 " let g:go_highlight_fields = 1
 " let g:go_highlight_types = 1
 let g:go_rename_command = 'gopls'
-
-" Bracket completion
-" inoremap ( ()<left>
-" inoremap [ []<left>
-" inoremap { {}<left>
-" inoremap {<CR> {<CR>}<ESC>O
-" inoremap {;<CR> {<CR>};<ESC>O
-" inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-" inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
-" inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
-" inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
-" inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
 
 " Tab space
 set smartindent
@@ -117,10 +108,6 @@ function SetJavaOptions()
 		setlocal shiftwidth=4
 		setlocal softtabstop=4
 endfunction
-
-" colorscheme set to 0 to have transparent in transparent terminal
-let g:dracula_colorterm = 0
-colorscheme dracula
 
 " vimwiki stuff
 hi link VimwikiLink DraculaLink
@@ -164,7 +151,6 @@ lua require('mytelescope')
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fe <cmd>Telescope file_browser<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>t <cmd>Telescope treesitter<cr>
@@ -184,35 +170,14 @@ exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS>
 let g:vimtex_view_general_viewer = 'okular'
 
 " Nerdtree settings
-autocmd VimEnter * NERDTree | NERDTreeToggle
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
 nnoremap <C-s> :NERDTreeToggle<Enter>
 let NERDTreeIgnore = ['__pycache__']
-
 " Closing on file opening
 let NERDTreeQuitOnOpen = 1
-
 " Prettier
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-
-" Highlights current file
-" Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()"
 
 " Enables lightline on single file
 set laststatus=2
@@ -245,15 +210,6 @@ endfunction
 "   call lightline#colorscheme()
 " endfunction
 "
-
-" Auto Bracket closing
-" inoremap " ""<left>
-" inoremap ' ''<left>
-" inoremap ( ()<left>
-" inoremap [ []<left>
-" inoremap { {}<left>
-" inoremap {<CR> {<CR>}<ESC>0
-" inoremap {;<CR> {<CR>};<ESC>0
 "
 " Save easier
 nnoremap zz :w<cr>
@@ -274,3 +230,8 @@ nmap <leader>gs :G<CR>
 
 " No Highlight
 nnoremap <Leader>h :noh <cr>
+
+" colorscheme set to 0 to have transparent in transparent terminal
+let g:dracula_colorterm = 0
+set termguicolors
+colorscheme dracula

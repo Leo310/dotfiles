@@ -1,48 +1,7 @@
--- Setup nvim-cmp.
-local cmp = require'cmp'
-
-cmp.setup({
-snippet = {
-  expand = function(args)
-	-- For `vsnip` user.
-	vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
-
-	-- For `luasnip` user.
-	-- require('luasnip').lsp_expand(args.body)
-
-	-- For `ultisnips` user.
-	-- vim.fn["UltiSnips#Anon"](args.body)
-  end,
-},
-mapping = {
-  ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-  ['<C-f>'] = cmp.mapping.scroll_docs(4),
-  ['<Tab>'] = cmp.mapping.select_next_item(),
-  ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-  ['<C-Space>'] = cmp.mapping.complete(),
-  ['<C-e>'] = cmp.mapping.close(),
-  ['<CR>'] = cmp.mapping.confirm({ select = true }),
-},
-sources = {
-  { name = 'nvim_lsp' },
-
-  -- For vsnip user.
-  { name = 'vsnip' },
-
-  -- For luasnip user.
-  -- { name = 'luasnip' },
-
-  -- For ultisnips user.
-  -- { name = 'ultisnips' },
-
-  { name = 'buffer' },
-}
-})
-
 -- LSP server config
 local nvim_lsp = require('lspconfig')
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 
@@ -100,9 +59,13 @@ end
 require'lspconfig'.pylsp.setup{
 	cmd = { "pylsp" },
 	filetypes = { "python" },
-	settings = {
+	settings = { -- for more settings: https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
 		pylsp = {
 			plugins = {
+				jedi_completion = {
+					include_params = true, -- Auto-completes methods and classes with tabstops for each parameter.
+					fuzzy = true,
+				},
 				flake8 = {
 					enabled = false,
 					-- "exclude": [],
@@ -119,6 +82,7 @@ require'lspconfig'.pylsp.setup{
 			},
 		}
 	},
+	capabilities = capabilities,
 	root_dir = nvim_lsp.util.root_pattern("venv", "pyproject.toml", "setup.py", "setup.cfg", "Pipfile", "requirements.txt"),
 	single_file_support = true,
 	on_attach = on_attach,
@@ -133,6 +97,7 @@ require'lspconfig'.ltex.setup{
 	root_dir = nvim_lsp.util.root_pattern("main.tex"),
 	on_attach = on_attach,
 	single_file_support = true,
+	capabilities = capabilities,
 }
 
 -- Spellcheck on top of native
@@ -203,6 +168,7 @@ end
 
 -- Typescript
 nvim_lsp.tsserver.setup({
+		capabilities = capabilities,
     on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
@@ -214,18 +180,11 @@ nvim_lsp.tsserver.setup({
   		local opts = { noremap=true, silent=true }
   		buf_set_keymap('n', "gt", ":TSLspOrganize<CR>", opts)
   		buf_set_keymap('n', "go", ":TSLspImportAll<CR>", opts)
-        -- buf_map(bufnr, "n", "gi", ":TSLspRenameFile<CR>")
+  		buf_set_keymap('n', "gi", ":TSLspRenameFile<CR>", opts)
     end,
 })
 
-local null_ls = require("null-ls")
-null_ls.setup({
-    sources = {
-        null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.code_actions.eslint,
-        null_ls.builtins.formatting.prettier,
-    },
-    on_attach = on_attach
-})
-
-require'lspconfig'.bashls.setup{}
+require'lspconfig'.bashls.setup{
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
