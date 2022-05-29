@@ -5,6 +5,7 @@ call plug#begin()
 	Plug 'nvim-telescope/telescope.nvim'
 	Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'nvim-telescope/telescope-ui-select.nvim'
+	Plug 'nvim-telescope/telescope-project.nvim'
 
 	" Treesitter
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -70,6 +71,7 @@ call plug#begin()
 call plug#end() 
 
 let g:dashboard_default_executive ='telescope'
+let g:dashboard_custom_footer = ["To the stars!!!"]
 let g:dashboard_custom_section = {
 	  \ 'a': {
       \ 'description': ['  Find File          '],
@@ -79,7 +81,7 @@ let g:dashboard_custom_section = {
       \ 'command': ':ene!'},
 	  \ 'c': {
       \ 'description': ['  Recent Projects    '],
-      \ 'command': ':sr'},
+      \ 'command': 'Telescope project'},
 	  \ 'd': {
       \ 'description': ['  Recently Used Files'],
       \ 'command': 'Telescope oldfiles'},
@@ -186,16 +188,11 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>t <cmd>Telescope treesitter<cr>
 nnoremap <leader>wd <cmd>Telescope diagnostics<cr>
+nnoremap <leader>ws <cmd>Telescope project<cr>
 
 " Sets line numbers
 :set nu
 :set rnu
-
-" Session settings
-let g:sessions_dir = '~/.config/nvim/sessions'
-exec 'nnoremap <Leader>ss :NERDTreeClose \| :mksession! ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
-exec 'nnoremap <Leader>sr :wa \| :bufdo bd \| :so ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
-exec 'nnoremap <Leader>sd :!rm ' . g:sessions_dir . '/*.vim<C-D><BS><BS><BS><BS><BS>'
 
 " Vimtex settings
 let g:vimtex_view_general_viewer = 'okular'

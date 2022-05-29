@@ -39,9 +39,15 @@ require('telescope').setup({
 				require("telescope.themes").get_dropdown {
 					-- even more opts
 				}
+			},
+			project = {
+				hidden_files = true, -- default: false
+				theme = "dropdown",
+				display_type = 'full'
 			}
 		},
 })
 
 require('telescope').load_extension('fzy_native')
 require("telescope").load_extension("ui-select")
+require("telescope").load_extension("project")
