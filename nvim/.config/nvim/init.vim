@@ -17,9 +17,12 @@ call plug#begin()
 	Plug 'hrsh7th/cmp-buffer'
 	Plug 'hrsh7th/nvim-cmp'
 	Plug 'onsails/lspkind.nvim' " icons of functions. can also define own icons (lookup nvim-cmp wiki -> cuztomize appearance)
+	Plug 'hrsh7th/cmp-cmdline'
+	Plug 'hrsh7th/cmp-path'
 	" Vsnip
 	Plug 'hrsh7th/vim-vsnip'
 	Plug 'hrsh7th/cmp-vsnip'
+	Plug 'rafamadriz/friendly-snippets'
 
 	" Python
 
@@ -62,7 +65,35 @@ call plug#begin()
 	" Bracket completion
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'luochen1990/rainbow'
+	" dashboard
+	Plug 'glepnir/dashboard-nvim'
 call plug#end() 
+
+let g:dashboard_default_executive ='telescope'
+let g:dashboard_custom_section = {
+	  \ 'a': {
+      \ 'description': ['  Find File          '],
+      \ 'command': 'Telescope find_files'},
+	  \ 'b': {
+      \ 'description': ['  New File           '],
+      \ 'command': ':ene!'},
+	  \ 'c': {
+      \ 'description': ['  Recent Projects    '],
+      \ 'command': ':sr'},
+	  \ 'd': {
+      \ 'description': ['  Recently Used Files'],
+      \ 'command': 'Telescope oldfiles'},
+  \ }
+
+" let g:dashboard_preview_command = 'cat'
+" let g:dashboard_preview_pipeline = 'lolcat'
+" let g:dashboard_preview_file = '~/.config/nvim/neovim.cat'
+" let g:dashboard_preview_file_height = 12
+" let g:dashboard_preview_file_width = 80
+let g:dashboard_preview_command = 'chafa -c full --fg-only --symbols braille'
+let g:dashboard_preview_file = '~/.config/nvim/head1.gif'
+let g:dashboard_preview_file_height = 20
+let g:dashboard_preview_file_width = 40
 
 " Rainbow Plugin
 let g:rainbow_active = 0 "set to 0 if you want to enable it later via :RainbowToggle

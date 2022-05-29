@@ -1,6 +1,12 @@
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 local lspkind = require'lspkind'
+local function fillSpacesToFixed(str, untilLength)
+		local untilFixed = untilLength - string.len(str)
+		local postfix = ''
+		for i = 1, untilFixed, 1 do postfix = postfix .. ' ' end
+		return str .. postfix
+end
 
 cmp.setup({
 	snippet = {
@@ -15,22 +21,49 @@ cmp.setup({
 		-- vim.fn["UltiSnips#Anon"](args.body)
 		end,
 	},
-	formatting = {
-		format = lspkind.cmp_format{
-			before = function(entry, vim_item)
-					vim_item.menu = ({
-						nvim_lsp = "ﲳ",
-						nvim_lua = "",
-						treesitter = "",
-						path = "ﱮ",
-						buffer = "﬘",
-						zsh = "",
-						vsnip = "",
-						spell = "暈",
-					})[entry.source.name]
-					return vim_item
-				end,
+	window = {
+		completion = {
+			border = {
+				'╭', '─', '╮', '│', '╯', '─', '╰', '│'
+			},
+			winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+			scrollbar = '║'
 		},
+		documentation = {
+			winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+      scrollbar = '',
+			border = {
+				'─',
+				'─',
+				'╮',
+				'│',
+				'╯',
+				'─',
+				'─',
+				''
+			}
+		},
+  },
+	formatting = {
+		fields = {'kind', 'abbr', 'menu'},
+		format = function(entry, vim_item)
+			vim_item.menu = ({
+				nvim_lsp = "ﲳ",
+				nvim_lua = "",
+				treesitter = "",
+				path = "ﱮ",
+				buffer = "﬘",
+				zsh = "",
+				vsnip = "",
+				spell = "暈",
+			})[entry.source.name]
+  		if vim_item.menu ~= nil then
+					-- buffers with code mostly
+					vim_item.menu = fillSpacesToFixed(vim_item.kind, 10) .. vim_item.menu
+			end
+			vim_item.kind = lspkind.symbolic(vim_item.kind, {with_text = false})
+			return vim_item
+		end,
   },
 	view = {                                                        
 		entries = {name = 'custom', selection_order = 'near_cursor' } 
@@ -53,3 +86,18 @@ cmp.setup({
 	}
 })
 
+cmp.setup.cmdline('/', {                                  
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		name = 'buffer'
+	},
+})    
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {                                  
+  mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{name = 'path'},
+		{name = 'cmdline'},
+	},
+})    
