@@ -99,9 +99,18 @@ let g:dashboard_custom_section = {
 " let g:dashboard_preview_file_height = 12
 " let g:dashboard_preview_file_width = 80
 let g:seed = srand()
-let g:dashboard_preview_command = 'chafa -c full --fg-only --speed 0.4 --symbols braille'
-let s:headfiles = split(system("ls ~/.config/nvim/head*" ), "\n")
-let g:dashboard_preview_file = s:headfiles[rand(g:seed)%len(s:headfiles)]
+let headfiles = split(system("ls ~/.config/nvim/head*" ), "\n")
+let randomHead = headfiles[rand(g:seed)%len(headfiles)]
+let speed = "1.0"
+" slow files
+if stridx(randomHead, "head1") != -1
+	let speed = "0.4"
+elseif stridx(randomHead, "head3") != -1
+	let speed = "0.6"
+endif
+
+let g:dashboard_preview_command = 'chafa -c full --fg-only --speed '. speed . ' --symbols braille'
+let g:dashboard_preview_file = randomHead
 let g:dashboard_preview_file_height = 20
 let g:dashboard_preview_file_width = 40
 
