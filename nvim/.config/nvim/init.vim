@@ -70,6 +70,12 @@ call plug#begin()
 	Plug 'glepnir/dashboard-nvim'
 call plug#end() 
 
+
+" colorscheme set to 0 to have transparent in transparent terminal
+let g:dracula_colorterm = 0
+set termguicolors
+colorscheme dracula
+
 let g:dashboard_default_executive ='telescope'
 let g:dashboard_custom_footer = ["To the stars!!!"]
 let g:dashboard_custom_section = {
@@ -92,8 +98,10 @@ let g:dashboard_custom_section = {
 " let g:dashboard_preview_file = '~/.config/nvim/neovim.cat'
 " let g:dashboard_preview_file_height = 12
 " let g:dashboard_preview_file_width = 80
+let g:seed = srand()
 let g:dashboard_preview_command = 'chafa -c full --fg-only --speed 0.4 --symbols braille'
-let g:dashboard_preview_file = '~/.config/nvim/head1.gif'
+let s:headfiles = split(system("ls ~/.config/nvim/head*" ), "\n")
+let g:dashboard_preview_file = s:headfiles[rand(g:seed)%len(s:headfiles)]
 let g:dashboard_preview_file_height = 20
 let g:dashboard_preview_file_width = 40
 
@@ -258,8 +266,3 @@ nmap <leader>gs :G<CR>
 
 " No Highlight
 nnoremap <Leader>h :noh <cr>
-
-" colorscheme set to 0 to have transparent in transparent terminal
-let g:dracula_colorterm = 0
-set termguicolors
-colorscheme dracula
