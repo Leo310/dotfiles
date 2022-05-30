@@ -68,6 +68,7 @@ call plug#begin()
 	Plug 'luochen1990/rainbow'
 	" dashboard
 	Plug 'glepnir/dashboard-nvim'
+	Plug 'rcarriga/nvim-notify'
 call plug#end() 
 
 
@@ -108,7 +109,7 @@ if stridx(randomHead, "head1") != -1
 elseif stridx(randomHead, "head3") != -1
 	let speed = "0.6"
 endif
-
+" let randomHead = "~/.config/nvim/head5.gif"
 let g:dashboard_preview_command = 'chafa -c full --fg-only --speed '. speed . ' --symbols braille'
 let g:dashboard_preview_file = randomHead
 let g:dashboard_preview_file_height = 20
@@ -120,6 +121,7 @@ let g:rainbow_active = 0 "set to 0 if you want to enable it later via :RainbowTo
 " enable mouse in all modes
 set mouse=a
 
+lua require('mynotify')
 " Treesitter
 lua require('treesitter')
 
