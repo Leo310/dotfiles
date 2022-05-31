@@ -51,6 +51,7 @@ call plug#begin()
 	" NERDTree
 	Plug 'preservim/nerdtree'
 	Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+	Plug 'kyazdani42/nvim-web-devicons'
 	Plug 'ryanoasis/vim-devicons'
 
 	" Tmux
@@ -63,14 +64,25 @@ call plug#begin()
 	Plug 'lewis6991/spellsitter.nvim'
 
 	" utils
-	" Bracket completion
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'luochen1990/rainbow'
-	" dashboard
 	Plug 'glepnir/dashboard-nvim'
 	Plug 'rcarriga/nvim-notify'
+	Plug 'sbdchd/neoformat'
+	Plug 'folke/trouble.nvim'
 call plug#end() 
 
+let g:neoformat_try_node_exe = 1
+autocmd BufWritePre *.js silent! Neoformat
+autocmd BufWritePre *.ts silent! Neoformat
+
+" trouble
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap <leader>xr <cmd>TroubleToggle lsp_references<cr>
 
 " colorscheme set to 0 to have transparent in transparent terminal
 let g:dracula_colorterm = 0
@@ -121,6 +133,7 @@ let g:rainbow_active = 0 "set to 0 if you want to enable it later via :RainbowTo
 " enable mouse in all modes
 set mouse=a
 
+lua require('mytrouble')
 lua require('mynotify')
 " Treesitter
 lua require('treesitter')
@@ -130,7 +143,6 @@ lua require('completion')
 
 " LSP go stuff
 lua require('lsp_config')
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting()
 autocmd BufWritePre *.go lua goimports(1000)
 set completeopt=menu,menuone,noselect
 
@@ -149,11 +161,17 @@ set shiftwidth=2
 " set expandtab " converts tabs to spaces
 augroup FileTypeSpecificAutocommands
     autocmd FileType javascript setlocal expandtab
-    autocmd FileType typescript setlocal expandtab
+    autocmd FileType typescript call SetTypescriptOptions()
     autocmd FileType java call SetJavaOptions()
 		" Spellcheck
 		autocmd FileType tex set spell spelllang=en_us,de_de
 augroup END
+
+function SetTypescriptOptions()
+		setlocal expandtab
+		setlocal shiftwidth=4
+		setlocal softtabstop=4
+endfunction
 
 function SetJavaOptions()
 		setlocal expandtab
