@@ -57,9 +57,6 @@ call plug#begin()
 	" Tmux
 	Plug 'christoomey/vim-tmux-navigator'
 
-	" Docs
-	Plug 'vimwiki/vimwiki'
-	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 	Plug 'lervag/vimtex'
 	Plug 'lewis6991/spellsitter.nvim'
 
@@ -178,15 +175,6 @@ function SetJavaOptions()
 		setlocal shiftwidth=4
 		setlocal softtabstop=4
 endfunction
-
-" vimwiki stuff
-hi link VimwikiLink DraculaLink
-hi link VimwikiHeader1 WildMenu 
-hi link VimwikiHeader2 DraculaGreenBold
-hi link VimwikiList DiffChange 
-
-let g:vimwiki_list = [{'path': '$ONEDRIVEPATH/Documents/vim/vimwiki',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 let mapleader = " " " map leader to Space
 let maplocalleader = " " " filetype specifc leader key
