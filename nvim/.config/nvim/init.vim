@@ -86,6 +86,10 @@ let g:dracula_colorterm = 0
 set termguicolors
 colorscheme dracula
 
+" vim.cmd [[autocmd! ColorScheme * highlight link FloatBorder NONE]]
+highlight link FloatBorder CmpPmenuBorder
+highlight! link Pmenu CmpPmenu
+
 let g:dashboard_default_executive ='telescope'
 let g:dashboard_custom_footer = ["To the stars!!!"]
 let g:dashboard_custom_section = {

@@ -27,11 +27,11 @@ cmp.setup({
 				'╭', '─', '╮', '│', '╯', '─', '╰', '│'
 			},
 			winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
-			scrollbar = '║'
+			-- scrollbar = '║'
 		},
 		documentation = {
 			winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
-      scrollbar = '',
+      -- scrollbar = '',
 			border = {
 				'─',
 				'─',
