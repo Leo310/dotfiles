@@ -1,4 +1,6 @@
+vim.notify = require('notify')
 local on_attach = function(client, bufnr)
+  vim.notify(string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()), "info", { title = "[lsp] Active" }, true)
   -- IMPORTANT DEFAULT COMMANDS. DIFFERENT THAN LSP_ON_ATTACH
   require('jdtls.setup').add_commands()
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
