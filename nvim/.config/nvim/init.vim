@@ -6,10 +6,15 @@ call plug#begin()
 	Plug 'nvim-telescope/telescope-fzy-native.nvim'
   Plug 'nvim-telescope/telescope-ui-select.nvim'
 	Plug 'nvim-telescope/telescope-project.nvim'
+	Plug 'tami5/sqlite.lua'
+	Plug 'nvim-telescope/telescope-cheat.nvim'
 
 	" Treesitter
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	Plug 'nvim-treesitter/playground'
+
+	" debuging
+	Plug 'mfussenegger/nvim-dap'
 
 	" LSP
 	Plug 'neovim/nvim-lspconfig'
@@ -26,6 +31,7 @@ call plug#begin()
 	Plug 'rafamadriz/friendly-snippets'
 
 	" Python
+	Plug 'mfussenegger/nvim-dap-python'
 
 	" Golang setup
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -69,26 +75,15 @@ call plug#begin()
 	Plug 'folke/trouble.nvim'
 call plug#end() 
 
-let g:neoformat_try_node_exe = 1
-autocmd BufWritePre *.js silent! Neoformat
-autocmd BufWritePre *.ts silent! Neoformat
 
-" trouble
-nnoremap <leader>xx <cmd>TroubleToggle<cr>
-nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
-nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
-nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
-nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
-nnoremap <leader>xr <cmd>TroubleToggle lsp_references<cr>
-
-" colorscheme set to 0 to have transparent in transparent terminal
-let g:dracula_colorterm = 0
-set termguicolors
-colorscheme dracula
-
-" vim.cmd [[autocmd! ColorScheme * highlight link FloatBorder NONE]]
-highlight link FloatBorder CmpPmenuBorder
-highlight! link Pmenu CmpPmenu
+function! MyHighlights() abort
+		highlight link FloatBorder CmpPmenuBorder
+		highlight! link Pmenu CmpPmenu
+endfunction
+augroup MyColors
+    autocmd!
+    autocmd ColorScheme * call MyHighlights()
+augroup END
 
 let g:dashboard_default_executive ='telescope'
 let g:dashboard_custom_footer = ["To the stars!!!"]
@@ -139,6 +134,7 @@ lua require('mynotify')
 " Treesitter
 lua require('treesitter')
 
+
 " completion menu and mappings
 lua require('completion')
 
@@ -186,6 +182,35 @@ let maplocalleader = " " " filetype specifc leader key
 set nowrap
 " Reload vims configuration file
 nnoremap <Leader>r :source ~/.config/nvim/init.vim<CR>
+
+" debugger
+nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+nnoremap <silent> <F6> <Cmd>lua require'dap'.terminate()<CR>
+nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>                                                       
+nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>                                                       
+nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>                                                        
+nnoremap <silent> <leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <leader>d <Cmd>lua require'dap'.repl.toggle()<CR>
+nnoremap <silent> <leader>cl <Cmd>lua require'dap'.clear_breakpoints()<CR>
+nnoremap <silent> <leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>        
+nnoremap <silent> <leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <leader>dr <Cmd>lua require'dap'.repl.open()<CR>                                                  
+nnoremap <silent> <leader>dl <Cmd>lua require'dap'.run_last()<CR>                                                   
+
+lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+
+" trouble
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap <leader>xr <cmd>TroubleToggle lsp_references<cr>
+
+let g:neoformat_try_node_exe = 1
+autocmd BufWritePre *.js silent! Neoformat
+autocmd BufWritePre *.ts silent! Neoformat
+                                                                 
 " Shortcuts
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -287,3 +312,8 @@ nmap <leader>gs :G<CR>
 
 " No Highlight
 nnoremap <Leader>h :noh <cr>
+
+" colorscheme set to 0 to have transparent in transparent terminal
+let g:dracula_colorterm = 0
+set termguicolors
+colorscheme dracula

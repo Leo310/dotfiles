@@ -3,6 +3,13 @@ local on_attach = function(client, bufnr)
   vim.notify(string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()), "info", { title = "[lsp] Active" }, true)
   -- IMPORTANT DEFAULT COMMANDS. DIFFERENT THAN LSP_ON_ATTACH
   require('jdtls.setup').add_commands()
+	  -- With `hotcodereplace = 'auto' the debug adapter will try to apply code changes
+  -- you make during a debug session immediately.
+  -- Remove the option if you do not want that.
+	-- Register Java adapter
+  require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+
+
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -10,6 +17,9 @@ local on_attach = function(client, bufnr)
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap=true, silent=true }
+	-- JAVA specific
+  buf_set_keymap('n', '<leader>j', '<Cmd>lua require("jdtls.dap").setup_dap_main_class_configs()<CR>', opts)
+
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
@@ -115,7 +125,9 @@ local config = {
   --
   -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
   init_options = {
-    bundles = {}
+		bundles = {
+    	vim.fn.glob("/home/leo/.local/share/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar")
+		}
   },
 }
 require('jdtls').start_or_attach(config)
