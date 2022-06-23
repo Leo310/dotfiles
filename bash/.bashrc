@@ -42,6 +42,7 @@ export VISUAL=nvim
 export EDITOR=nvim
 
 alias tmux='tmux -2' # forces tmux to use full 256 colors
+alias v='nvim'
 
 # ==========================
 # ========  Prompt =========
