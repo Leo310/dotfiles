@@ -15,6 +15,7 @@ call plug#begin()
 
 	" debuging
 	Plug 'mfussenegger/nvim-dap'
+	Plug 'rcarriga/nvim-dap-ui'
 
 	" LSP
 	Plug 'neovim/nvim-lspconfig'
@@ -62,12 +63,14 @@ call plug#begin()
 
 	" Tmux
 	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'RyanMillerC/better-vim-tmux-resizer'
 
 	Plug 'lervag/vimtex'
 	Plug 'lewis6991/spellsitter.nvim'
 
 	" utils
 	Plug 'jiangmiao/auto-pairs'
+	Plug 'metakirby5/codi.vim'
 	Plug 'luochen1990/rainbow'
 	Plug 'glepnir/dashboard-nvim'
 	Plug 'rcarriga/nvim-notify'
@@ -129,6 +132,7 @@ let g:rainbow_active = 0 "set to 0 if you want to enable it later via :RainbowTo
 " enable mouse in all modes
 set mouse=a
 
+lua require('mydap')
 lua require('mytrouble')
 lua require('mynotify')
 " Treesitter
@@ -212,25 +216,10 @@ autocmd BufWritePre *.js silent! Neoformat
 autocmd BufWritePre *.ts silent! Neoformat
                                                                  
 " Shortcuts
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-" make vim resize like tmux
-func! Resize(dir, count) abort
-    if winnr('$') == 1 | return | endif
-    let dir = a:dir
-    if winnr() == winnr('$')
-        let dir = !dir
-    endif
-    let cmd_dir = dir ? '+' : '-'
-    exe "vert resize ". cmd_dir . a:count
-endfunc
-map <C-M-l> :<C-u>call Resize(1, 5)<CR>
-map <C-M-h> :<C-u>call Resize(0, 5)<CR>
-" map <C-M-h> 5<C-w><
-" map <C-M-j> 5<C-w>+
-" map <C-M-k> 5<C-w>-
-" map <C-M-l> 5<C-w>>
+map <C-S-h> 5<C-w><
+map <C-S-j> 5<C-w>+
+map <C-S-k> 5<C-w>-
+map <C-S-l> 5<C-w>>
 
 " Telescope
 lua require('mytelescope')
