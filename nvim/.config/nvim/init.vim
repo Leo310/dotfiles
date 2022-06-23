@@ -33,6 +33,7 @@ call plug#begin()
 
 	" Python
 	Plug 'mfussenegger/nvim-dap-python'
+	Plug 'jmcantrell/vim-virtualenv'
 
 	" Golang setup
 	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -221,6 +222,7 @@ nnoremap <silent> <leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('B
 nnoremap <silent> <leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
 nnoremap <silent> <leader>dr <Cmd>lua require'dap'.repl.open()<CR>                                                  
 nnoremap <silent> <leader>dl <Cmd>lua require'dap'.run_last()<CR>                                                   
+nnoremap <silent> <leader>du <Cmd>lua require'dapui'.toggle()<CR>                                                   
 
 lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
 
