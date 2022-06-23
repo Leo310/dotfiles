@@ -136,12 +136,12 @@ for pid in $(pidof -x konsole); do
 	KONSOLE_INSTANCES=$((KONSOLE_INSTANCES+1))
 done
 
-TMUX_INSTANCES=$(tmux list-panes | wc -l)
+TMUX_INSTANCES=$(($(tmux list-panes | wc -l) + $(tmux list-windows | wc -l)))
 # for pid in $(pidof -x tmux); do
 # 	TMUX_INSTANCES=$((TMUX_INSTANCES+1))
 # done
 
-if [ $KONSOLE_INSTANCES -le 1 ] && [ $TMUX_INSTANCES -le 1 ]; then
+if [ $KONSOLE_INSTANCES -le 1 ] && [ $TMUX_INSTANCES -le 2 ]; then
 	neofetch
 fi
 
