@@ -109,7 +109,7 @@ augroup MyColors
     autocmd!
     autocmd ColorScheme * call MyHighlights()
 augroup END
-
+lua vim.lsp.set_log_level('debug')
 let g:dashboard_default_executive ='telescope'
 let g:dashboard_custom_footer = ["To the stars!!!"]
 let g:dashboard_custom_section = {
@@ -234,9 +234,9 @@ nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
 nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
 nnoremap <leader>xr <cmd>TroubleToggle lsp_references<cr>
 
-let g:neoformat_try_node_exe = 1
-autocmd BufWritePre *.js silent! Neoformat
-autocmd BufWritePre *.ts silent! Neoformat
+" let g:neoformat_try_node_exe = 1
+" autocmd BufWritePre *.js silent! Neoformat
+" autocmd BufWritePre *.ts silent! Neoformat
                                                                  
 " Shortcuts
 map <C-S-h> 5<C-w><

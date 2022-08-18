@@ -91,19 +91,26 @@ require'lspconfig'.pylsp.setup{
 					include_params = true, -- Auto-completes methods and classes with tabstops for each parameter.
 					fuzzy = true,
 				},
-				flake8 = {
-					enabled = false,
-					-- "exclude": [],
-					-- "hangClosing": false,
-					-- ignore = {"E501"},
-					maxLineLength = 100,
-					-- indentSize = 245,
-					-- "perFileIgnores": [],
-					-- "select": []
+        flake8 = {
+          enabled = true,
+          ignore = {},
+          maxLineLength = 88 
+        },
+				-- NOT WORKING ATM
+				-- black = {
+				-- 	enabled = false,
+          -- maxLineLength = 79
+				-- },
+				pycodestyle = {enabled = false},
+        isort = {enabled = false},
+        yapf = {enabled = false},
+        pylint = {
+          enabled = true,
+					args = {
+						"--generated-members=torch.*"
+					},
 				},
-				pycodestyle = {
-					maxLineLength = 100,
-				}
+        rope_completion = {enabled = false}
 			},
 		}
 	},
