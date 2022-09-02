@@ -12,6 +12,7 @@ call plug#begin()
 	" Treesitter
 	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 	Plug 'nvim-treesitter/playground'
+	Plug 'nvim-treesitter/nvim-treesitter-context'
 
 	" debuging
 	Plug 'mfussenegger/nvim-dap'
@@ -83,6 +84,8 @@ call plug#end()
 function! MyHighlights() abort
 		highlight link FloatBorder CmpPmenuBorder
 		highlight! link Pmenu CmpPmenu
+
+		hi link TreesitterContext PmenuSel
 
 		" Dap highlights
 		hi default link DapUIVariable Normal
