@@ -107,7 +107,8 @@ require'lspconfig'.pylsp.setup{
         pylint = {
           enabled = true,
 					args = {
-						"--generated-members=torch.*"
+						"--generated-members=torch.*",
+						"--extension-pkg-whitelist=pygame"
 					},
 				},
         rope_completion = {enabled = false}
