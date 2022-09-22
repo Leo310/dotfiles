@@ -107,7 +107,9 @@ require'lspconfig'.pylsp.setup{
         pylint = {
           enabled = true,
 					args = {
-						"--generated-members=torch.*"
+						"--generated-members=torch.*",
+						"--extension-pkg-whitelist=pygame",
+						"--variable-rgx='[a-z0-9_]{1,30}$'"
 					},
 				},
         rope_completion = {enabled = false}
