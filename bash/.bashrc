@@ -100,7 +100,7 @@ unset color_prompt force_color_prompt
 
 # auto exec tmux and neofetch
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-	exec tmux
+	exec tmux new -As 0
 fi
 
 
