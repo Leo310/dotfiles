@@ -28,21 +28,25 @@ shopt -s checkwinsize
 # vi keymap on command line
 set -o vi
 
+alias v='nvim'
+
 # for nvm
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # better cd
-. ~/z.sh
+FILE=~/z.sh
+if test -f "$FILE"; then
+	. $FILE
+else
+	echo "Stow z.sh (util) from dotfiles"
+fi
 
 # git autocompletion
 source /usr/share/bash-completion/completions/git
 
 export VISUAL=nvim
 export EDITOR=nvim
-
-alias tmux='tmux -2' # forces tmux to use full 256 colors
-alias v='nvim'
 
 # ==========================
 # ========  Prompt =========
@@ -100,7 +104,11 @@ unset color_prompt force_color_prompt
 
 # auto exec tmux and neofetch
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+	alias tmux='tmux -2' # forces tmux to use full 256 colors
+
 	exec tmux new -As 0
+else
+	echo "Install tmux"
 fi
 
 
