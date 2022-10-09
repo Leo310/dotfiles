@@ -107,7 +107,8 @@ if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] &&
 	alias tmux='tmux -2' # forces tmux to use full 256 colors
 
 	exec tmux new -As 0
-else
+elif ! command -v tmux &> /dev/null 
+then
 	echo "Install tmux"
 fi
 
