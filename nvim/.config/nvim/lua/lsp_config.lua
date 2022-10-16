@@ -109,7 +109,9 @@ require'lspconfig'.pylsp.setup{
 					args = {
 						"--generated-members=torch.*",
 						"--extension-pkg-whitelist=pygame",
-						"--variable-rgx='[a-z0-9_]{1,30}$'"
+						"--variable-rgx='[a-z0-9_]{1,30}$'",
+						"--argument-rgx='[a-z0-9_]{1,30}$'",
+						"--disable=C0111"
 					},
 				},
         rope_completion = {enabled = false}
@@ -212,9 +214,9 @@ nvim_lsp.tsserver.setup({
         on_attach(client, bufnr)
   		local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   		local opts = { noremap=true, silent=true }
-  		buf_set_keymap('n', "gt", ":TSLspOrganize<CR>", opts)
-  		buf_set_keymap('n', "go", ":TSLspImportAll<CR>", opts)
-  		buf_set_keymap('n', "gi", ":TSLspRenameFile<CR>", opts)
+  		buf_set_keymap('n', "gO", ":TSLspOrganize<CR>", opts)
+  		buf_set_keymap('n', "gI", ":TSLspImportAll<CR>", opts)
+  		buf_set_keymap('n', "gn", ":TSLspRenameFile<CR>", opts)
     end,
 })
 
