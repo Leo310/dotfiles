@@ -130,6 +130,9 @@ let g:dashboard_custom_section = {
       \ 'command': 'Telescope oldfiles'},
   \ }
 
+" better pasting
+xnoremap <leader>p "_dp
+
 " let g:dashboard_preview_command = 'cat'
 " let g:dashboard_preview_pipeline = 'lolcat'
 " let g:dashboard_preview_file = '~/.config/nvim/neovim.cat'
