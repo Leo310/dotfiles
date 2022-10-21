@@ -5,6 +5,7 @@ require('telescope').setup({
         -- Default configuration for telescope goes here:
         -- config_key = value,
         -- ..
+				vimgrep_arguments = { 'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
 				prompt_prefix = "> ",
 				mappings = {
 					i = {
@@ -33,7 +34,10 @@ require('telescope').setup({
 		  },
 		  file_browser = {
 			  hidden = true
-		  }
+		  },
+			live_grep = {
+				hidden = true
+			},
 	  },
 	  extensions = {
 		  fzy_native = {
