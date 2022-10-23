@@ -60,6 +60,7 @@ call plug#begin()
 	" NERDTree
 	Plug 'preservim/nerdtree'
 	" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+	Plug 'johnstef99/vim-nerdtree-syntax-highlight'
 	Plug 'kyazdani42/nvim-web-devicons'
 	Plug 'ryanoasis/vim-devicons'
 
