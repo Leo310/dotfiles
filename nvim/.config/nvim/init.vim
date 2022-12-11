@@ -1,86 +1,4 @@
-" Plugins
-call plug#begin()
-	" Telescope
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-telescope/telescope.nvim'
-	Plug 'nvim-telescope/telescope-fzy-native.nvim'
-  Plug 'nvim-telescope/telescope-ui-select.nvim'
-	Plug 'nvim-telescope/telescope-project.nvim'
-	Plug 'tami5/sqlite.lua'
-	Plug 'nvim-telescope/telescope-cheat.nvim'
-
-	" Treesitter
-	Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-	Plug 'nvim-treesitter/playground'
-	Plug 'nvim-treesitter/nvim-treesitter-context'
-
-	" debuging
-	Plug 'mfussenegger/nvim-dap'
-	Plug 'rcarriga/nvim-dap-ui'
-
-	" LSP
-	Plug 'neovim/nvim-lspconfig'
-	" completion
-	Plug 'hrsh7th/cmp-nvim-lsp'
-	Plug 'hrsh7th/cmp-buffer'
-	Plug 'hrsh7th/nvim-cmp'
-	Plug 'onsails/lspkind.nvim' " icons of functions. can also define own icons (lookup nvim-cmp wiki -> cuztomize appearance)
-	Plug 'hrsh7th/cmp-cmdline'
-	Plug 'hrsh7th/cmp-path'
-	" Vsnip
-	Plug 'hrsh7th/vim-vsnip'
-	Plug 'hrsh7th/cmp-vsnip'
-	Plug 'rafamadriz/friendly-snippets'
-
-	" Python
-	Plug 'mfussenegger/nvim-dap-python'
-	Plug 'jmcantrell/vim-virtualenv'
-
-	" Golang setup
-	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-	" Typescript setup
-	Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
-
-	" Java setup
-	Plug 'mfussenegger/nvim-jdtls'
-
-	" Git integration
-	Plug 'tpope/vim-fugitive'
-
-	" Comments
-	Plug 'tpope/vim-commentary'
-
-	" Colorscheme
-	Plug 'dracula/vim' , {'as': 'dracula'}
-	
-	" Line
-	Plug 'itchyny/lightline.vim'
-	
-	" NERDTree
-	Plug 'preservim/nerdtree'
-	" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-	Plug 'johnstef99/vim-nerdtree-syntax-highlight'
-	Plug 'kyazdani42/nvim-web-devicons'
-	Plug 'ryanoasis/vim-devicons'
-
-	" Tmux
-	Plug 'christoomey/vim-tmux-navigator'
-	Plug 'RyanMillerC/better-vim-tmux-resizer'
-
-	Plug 'lervag/vimtex'
-	Plug 'lewis6991/spellsitter.nvim'
-
-	" utils
-	Plug 'jiangmiao/auto-pairs'
-	Plug 'metakirby5/codi.vim'
-	Plug 'luochen1990/rainbow'
-	Plug 'glepnir/dashboard-nvim'
-	Plug 'rcarriga/nvim-notify'
-	Plug 'sbdchd/neoformat'
-	Plug 'folke/trouble.nvim'
-call plug#end() 
-
+lua require('leo310')
 
 function! MyHighlights() abort
 		highlight link FloatBorder CmpPmenuBorder
@@ -113,7 +31,6 @@ augroup MyColors
     autocmd!
     autocmd ColorScheme * call MyHighlights()
 augroup END
-lua vim.lsp.set_log_level('debug')
 let g:dashboard_default_executive ='telescope'
 let g:dashboard_custom_footer = ["To the stars!!!"]
 let g:dashboard_custom_section = {
@@ -161,18 +78,6 @@ let g:rainbow_active = 0 "set to 0 if you want to enable it later via :RainbowTo
 " enable mouse in all modes
 set mouse=a
 
-lua require('mydap')
-lua require('mytrouble')
-lua require('mynotify')
-" Treesitter
-lua require('treesitter')
-
-
-" completion menu and mappings
-lua require('completion')
-
-" LSP go stuff
-lua require('lsp_config')
 autocmd BufWritePre *.go lua goimports(1000)
 set completeopt=menu,menuone,noselect
 
@@ -250,9 +155,6 @@ map <C-S-h> 5<C-w><
 map <C-S-j> 5<C-w>+
 map <C-S-k> 5<C-w>-
 map <C-S-l> 5<C-w>>
-
-" Telescope
-lua require('mytelescope')
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
