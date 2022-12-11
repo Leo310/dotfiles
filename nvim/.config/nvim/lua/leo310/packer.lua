@@ -1,3 +1,4 @@
+-- For bootstrapping packer the first time
 local ensure_packer = function()
 	local fn = vim.fn
 	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -12,6 +13,9 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
+	-- Packer (for bootstrapping)
+	use { "wbthomason/packer.nvim" }
+
 	-- Telescope
 	use 'nvim-lua/plenary.nvim'
 	use 'nvim-telescope/telescope.nvim'
@@ -25,6 +29,24 @@ return require('packer').startup(function(use)
 	use { 'nvim-treesitter/nvim-treesitter', ['do'] = ':TSUpdate' }
 	use 'nvim-treesitter/playground'
 	use 'nvim-treesitter/nvim-treesitter-context'
+
+	-- Copilot
+	use {
+		"zbirenbaum/copilot.lua",
+		event = "VimEnter",
+		config = function()
+			vim.defer_fn(function()
+				require("copilot").setup()
+			end, 100)
+		end,
+	}
+	use {
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
+		end
+	}
 
 	-- debuging
 	use 'mfussenegger/nvim-dap'
