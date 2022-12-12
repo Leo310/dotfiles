@@ -1,7 +1,5 @@
 vim.opt.mouse = 'a'
 
-vim.opt.completeopt = "menu,menuone,noselect"
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 

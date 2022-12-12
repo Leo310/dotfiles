@@ -60,6 +60,10 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 	buf_set_keymap('n', '<leader>gl', '<cmd>Telescope grep_string<CR>', opts)
 
+	if client.server_capabilities.documentFormattingProvider then
+		vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format(nil, 2000)")
+	end
+
 	-- Set autocommands conditional on server_capabilities
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_exec([[
