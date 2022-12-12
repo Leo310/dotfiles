@@ -1,8 +1,8 @@
 lua require('leo310')
 
 function! MyHighlights() abort
-		highlight link FloatBorder CmpPmenuBorder
-		highlight! link Pmenu CmpPmenu
+	highlight link FloatBorder CmpPmenuBorder
+	highlight! link Pmenu CmpPmenu
 
 		hi link TreesitterContext PmenuSel
 
@@ -31,6 +31,8 @@ augroup MyColors
     autocmd!
     autocmd ColorScheme * call MyHighlights()
 augroup END
+
+
 let g:dashboard_default_executive ='telescope'
 let g:dashboard_custom_footer = ["To the stars!!!"]
 let g:dashboard_custom_section = {
@@ -47,9 +49,6 @@ let g:dashboard_custom_section = {
       \ 'description': ['  Recently Used Files'],
       \ 'command': 'Telescope oldfiles'},
   \ }
-
-" better pasting
-xnoremap <leader>p "_dp
 
 " let g:dashboard_preview_command = 'cat'
 " let g:dashboard_preview_pipeline = 'lolcat'
@@ -75,11 +74,7 @@ let g:dashboard_preview_file_width = 40
 " Rainbow Plugin
 let g:rainbow_active = 0 "set to 0 if you want to enable it later via :RainbowToggle
 
-" enable mouse in all modes
-set mouse=a
-
 autocmd BufWritePre *.go lua goimports(1000)
-set completeopt=menu,menuone,noselect
 
 " Treesitter does everything now
 " let g:go_highlight_functions = 1
@@ -89,11 +84,6 @@ set completeopt=menu,menuone,noselect
 " let g:go_highlight_types = 1
 let g:go_rename_command = 'gopls'
 
-" Tab space
-set smartindent
-set tabstop=2
-set shiftwidth=2
-" set expandtab " converts tabs to spaces
 augroup FileTypeSpecificAutocommands
     autocmd FileType javascript setlocal expandtab
     autocmd FileType typescript call SetTypescriptOptions()
@@ -114,10 +104,7 @@ function SetJavaOptions()
 		setlocal softtabstop=4
 endfunction
 
-let mapleader = " " " map leader to Space
 let maplocalleader = " " " filetype specifc leader key
-" Horizontal scroll
-set nowrap
 " Reload vims configuration file
 nnoremap <Leader>r :source ~/.config/nvim/init.vim<CR>
 
@@ -135,39 +122,6 @@ nnoremap <silent> <leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.
 nnoremap <silent> <leader>dr <Cmd>lua require'dap'.repl.open()<CR>                                                  
 nnoremap <silent> <leader>dl <Cmd>lua require'dap'.run_last()<CR>                                                   
 nnoremap <silent> <leader>du <Cmd>lua require'dapui'.toggle()<CR>                                                   
-
-lua require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
-
-" trouble
-nnoremap <leader>xx <cmd>TroubleToggle<cr>
-nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
-nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
-nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
-nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
-nnoremap <leader>xr <cmd>TroubleToggle lsp_references<cr>
-
-" let g:neoformat_try_node_exe = 1
-" autocmd BufWritePre *.js silent! Neoformat
-" autocmd BufWritePre *.ts silent! Neoformat
-                                                                 
-" Shortcuts
-map <C-S-h> 5<C-w><
-map <C-S-j> 5<C-w>+
-map <C-S-k> 5<C-w>-
-map <C-S-l> 5<C-w>>
-
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>t <cmd>Telescope treesitter<cr>
-nnoremap <leader>wd <cmd>Telescope diagnostics<cr>
-nnoremap <leader>ws <cmd>Telescope project<cr>
-
-" Sets line numbers
-:set nu
-:set rnu
 
 " Vimtex settings
 let g:vimtex_view_general_viewer = 'okular'
@@ -200,39 +154,9 @@ let g:lightline = {
 function! LightlineFilename()
 	return expand('%')
 endfunction
-" Transparecy
-" autocmd VimEnter * call SetupLightlineColors()
-" function SetupLightlineColors() abort
-"   " transparent background in statusbar
-"   let l:palette = lightline#palette()
-" 
-"   let l:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
-"   let l:palette.inactive.middle = l:palette.normal.middle
-"   let l:palette.tabline.middle = l:palette.normal.middle
-" 
-"   call lightline#colorscheme()
-" endfunction
-"
-"
-" Save easier
-nnoremap zz :w<cr>
-" and goto cursor and Insert mod
-" inoremap zz <ESC>:w<cr>gi
-inoremap zz <ESC>:w<cr>
-
-" Encoding
-set encoding=utf-8
 
 " Clipboard
 set clipboard=unnamed
-
-"Git fugitiv plugin maps
-nmap <leader>gj :diffget //3<CR>
-nmap <leader>gf :diffget //2<CR>
-nmap <leader>gs :G<CR>
-
-" No Highlight
-nnoremap <Leader>h :noh <cr>
 
 " colorscheme set to 0 to have transparent in transparent terminal
 let g:dracula_colorterm = 0
