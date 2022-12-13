@@ -6,6 +6,9 @@ function! MyHighlights() abort
 
 		hi link TreesitterContext PmenuSel
 
+		hi link DashboardCenter DraculaYellow
+		hi link DashboardFooter DraculaPurple
+
 		" Dap highlights
 		hi default link DapUIVariable Normal
 		hi default link DapUIScope DraculaPurple
@@ -31,45 +34,6 @@ augroup MyColors
     autocmd!
     autocmd ColorScheme * call MyHighlights()
 augroup END
-
-
-let g:dashboard_default_executive ='telescope'
-let g:dashboard_custom_footer = ["To the stars!!!"]
-let g:dashboard_custom_section = {
-	  \ 'a': {
-      \ 'description': ['  Find File          '],
-      \ 'command': 'Telescope find_files'},
-	  \ 'b': {
-      \ 'description': ['  New File           '],
-      \ 'command': ':ene!'},
-	  \ 'c': {
-      \ 'description': ['  Recent Projects    '],
-      \ 'command': 'Telescope project'},
-	  \ 'd': {
-      \ 'description': ['  Recently Used Files'],
-      \ 'command': 'Telescope oldfiles'},
-  \ }
-
-" let g:dashboard_preview_command = 'cat'
-" let g:dashboard_preview_pipeline = 'lolcat'
-" let g:dashboard_preview_file = '~/.config/nvim/neovim.cat'
-" let g:dashboard_preview_file_height = 12
-" let g:dashboard_preview_file_width = 80
-let g:seed = srand()
-let headfiles = split(system("ls ~/.config/nvim/head*" ), "\n")
-let randomHead = headfiles[rand(g:seed)%len(headfiles)]
-let speed = "1.0"
-" slow files
-if stridx(randomHead, "head1") != -1
-	let speed = "0.4"
-elseif stridx(randomHead, "head3") != -1
-	let speed = "0.6"
-endif
-" let randomHead = "~/.config/nvim/head5.gif"
-let g:dashboard_preview_command = 'chafa -c full --fg-only --speed '. speed . ' --symbols braille'
-let g:dashboard_preview_file = randomHead
-let g:dashboard_preview_file_height = 20
-let g:dashboard_preview_file_width = 40
 
 " Rainbow Plugin
 let g:rainbow_active = 0 "set to 0 if you want to enable it later via :RainbowToggle
