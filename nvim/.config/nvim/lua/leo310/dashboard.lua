@@ -6,7 +6,7 @@ db.session_directory = "~/.config/nvim/dashboard/session"
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'DBSessionSavePre',
 	callback = function()
-		pcall(vim.cmd, 'NERDTreeClose')
+		pcall(vim.cmd, 'NvimTreeClose')
 	end,
 })
 

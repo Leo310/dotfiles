@@ -88,12 +88,14 @@ return require('packer').startup(function(use)
 	-- Colorscheme
 	use { 'dracula/vim', as = 'dracula' }
 
-	-- NERDTree
-	use 'preservim/nerdtree'
-	-- use 'tiagofumo/vim-nerdtree-syntax-highlight'
-	use 'johnstef99/vim-nerdtree-syntax-highlight'
-	use 'kyazdani42/nvim-web-devicons'
-	use 'ryanoasis/vim-devicons'
+	-- Nvim Tree
+	use 'nvim-tree/nvim-web-devicons'
+	use {
+		'nvim-tree/nvim-tree.lua',
+		requires = {
+			'nvim-tree/nvim-web-devicons', -- optional, for file icons
+		}
+	}
 
 	-- Line
 	use {

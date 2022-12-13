@@ -90,16 +90,6 @@ nnoremap <silent> <leader>du <Cmd>lua require'dapui'.toggle()<CR>
 " Vimtex settings
 let g:vimtex_view_general_viewer = 'okular'
 
-" Nerdtree settings
-nnoremap <silent> <Leader>v :NERDTreeFind<CR>
-nnoremap <C-s> :NERDTreeToggle<Enter>
-let NERDTreeIgnore = ['__pycache__']
-" Closing on file opening
-let NERDTreeQuitOnOpen = 1
-" Prettier
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-
 " Clipboard
 set clipboard=unnamed
 
