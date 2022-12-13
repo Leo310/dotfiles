@@ -98,15 +98,14 @@ return require('packer').startup(function(use)
 	}
 
 	-- Line
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-	}
+	use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+	use { 'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons' }
 
 	-- Tmux
 	use 'christoomey/vim-tmux-navigator'
 	use 'RyanMillerC/better-vim-tmux-resizer'
 
+	-- Latex
 	use 'lervag/vimtex'
 	use 'lewis6991/spellsitter.nvim'
 
