@@ -100,25 +100,6 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-" Enables lightline on single file
-set laststatus=2
-" Lightline settings
-" colorscheme
-let g:lightline = {
-	\ 'colorscheme': 'Tomorrow_Night_Blue',	
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-	\ },
-	\ 'component_function': {
-      	\   'gitbranch': 'FugitiveHead',
-				\		'filename': 'LightlineFilename'
-      	\ },
-\ }
-function! LightlineFilename()
-	return expand('%')
-endfunction
-
 " Clipboard
 set clipboard=unnamed
 

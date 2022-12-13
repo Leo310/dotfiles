@@ -88,15 +88,18 @@ return require('packer').startup(function(use)
 	-- Colorscheme
 	use { 'dracula/vim', as = 'dracula' }
 
-	-- Line
-	use 'itchyny/lightline.vim'
-
 	-- NERDTree
 	use 'preservim/nerdtree'
 	-- use 'tiagofumo/vim-nerdtree-syntax-highlight'
 	use 'johnstef99/vim-nerdtree-syntax-highlight'
 	use 'kyazdani42/nvim-web-devicons'
 	use 'ryanoasis/vim-devicons'
+
+	-- Line
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
 
 	-- Tmux
 	use 'christoomey/vim-tmux-navigator'
