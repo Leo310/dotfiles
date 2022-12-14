@@ -12,4 +12,4 @@ require('leo310.telescope')
 require('leo310.dashboard')
 require('leo310.lualine')
 require('leo310.nvimtree')
-require('leo310.tabline')
+-- require('leo310.tabline') Disable for now because show_tabs_always = false ist not working

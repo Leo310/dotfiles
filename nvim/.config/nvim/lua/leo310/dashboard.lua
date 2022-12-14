@@ -1,7 +1,7 @@
 local db = require('dashboard')
 
 db.session_auto_save_on_exit = true
-db.session_directory = "~/.config/nvim/dashboard/session"
+db.session_directory = "~/.config/nvim/db"
 -- Close NerdTree buffer before auto-saving the current session
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'DBSessionSavePre',
@@ -22,7 +22,7 @@ if randomNumber == 1 then
 elseif randomNumber == 2 then
 	speed = '0.6'
 end
-db.preview_file_path = "~/.config/nvim/dashboard/gifs/head" .. randomNumber .. ".gif"
+db.preview_file_path = "~/.config/nvim/db/head" .. randomNumber .. ".gif"
 db.preview_command = 'chafa -c full --fg-only --speed ' .. speed .. ' --symbols braille'
 
 db.custom_center = {
