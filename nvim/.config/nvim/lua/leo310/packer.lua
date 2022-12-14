@@ -22,8 +22,6 @@ return require('packer').startup(function(use)
 	use 'nvim-telescope/telescope-fzy-native.nvim'
 	use 'nvim-telescope/telescope-ui-select.nvim'
 	use 'nvim-telescope/telescope-project.nvim'
-	use 'tami5/sqlite.lua'
-	use 'nvim-telescope/telescope-cheat.nvim'
 
 	-- Treesitter
 	use { 'nvim-treesitter/nvim-treesitter', ['do'] = ':TSUpdate' }
@@ -48,9 +46,10 @@ return require('packer').startup(function(use)
 		end
 	}
 
-	-- debuging
+	-- debuging / refactoring
 	use 'mfussenegger/nvim-dap'
 	use 'rcarriga/nvim-dap-ui'
+	use 'folke/trouble.nvim'
 
 	-- LSP
 	use 'neovim/nvim-lspconfig'
@@ -99,7 +98,9 @@ return require('packer').startup(function(use)
 
 	-- Line
 	use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
-	use { 'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons' }
+	use { 'kdheepak/tabline.nvim',
+		requires = { { 'hoob3rt/lualine.nvim', opt = true }, { 'kyazdani42/nvim-web-devicons', opt = true } }
+	}
 
 	-- Tmux
 	use 'christoomey/vim-tmux-navigator'
@@ -111,12 +112,9 @@ return require('packer').startup(function(use)
 
 	-- utils
 	use 'jiangmiao/auto-pairs'
-	use 'metakirby5/codi.vim'
 	use 'luochen1990/rainbow'
 	use 'glepnir/dashboard-nvim'
 	use 'rcarriga/nvim-notify'
-	use 'sbdchd/neoformat'
-	use 'folke/trouble.nvim'
 
 	if packer_bootstrap then
 		require('packer').sync()
