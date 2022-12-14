@@ -1,5 +1,5 @@
 -- Keymaps
-vim.keymap.set("n", "<leader>v", ":NvimTreeFind<cr>", { desc = 'Find File in Tree' })
+vim.keymap.set("n", "<leader>v", ":NvimTreeFindFile<cr>", { desc = 'Find File in Tree' })
 vim.keymap.set("n", "<C-s>", ":NvimTreeToggle<cr>", { desc = 'Toggle Tree' })
 
 -- disable netrw at the very start of your init.lua (strongly advised)

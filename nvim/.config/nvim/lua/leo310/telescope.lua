@@ -1,10 +1,10 @@
 -- Keymaps
-vim.keymap.set("n", "ff", ":Telescope find_files<CR>")
-vim.keymap.set("n", "fg", ":Telescope live_grep<CR>")
-vim.keymap.set("n", "fb", ":Telescope buffers<CR>")
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>")
+vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>")
+vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>")
 vim.keymap.set("n", "<leader>?", ":Telescope keymaps<CR>")
-vim.keymap.set("n", "fh", ":Telescope help_tags<CR>")
-vim.keymap.set("n", "t", ":Telescope treesitter<CR>")
+vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>")
+vim.keymap.set("n", "<leader>t", ":Telescope treesitter<CR>")
 vim.keymap.set("n", "<leader>wd", ":Telescope diagnostics<CR>")
 vim.keymap.set("n", "<leader>ws", ":Telescope project<CR>")
 

@@ -30,5 +30,5 @@ db.custom_center = {
 	{ icon = '  ', desc = 'Recently latest session', action = 'SessionLoad' },
 	{ icon = '  ', desc = 'My Projects            ', action = 'Telescope project' },
 	{ icon = '  ', desc = 'New file               ', action = 'DashboardNewFile' },
-	{ icon = '  ', desc = 'Recently Used Files    ', action = 'Telescope oldfiles' }
+	-- { icon = '  ', desc = 'Recently Used Files    ', action = 'Telescope oldfiles' }
 }
