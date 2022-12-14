@@ -1,5 +1,3 @@
-lua require('leo310')
-
 function! MyHighlights() abort
 	highlight link FloatBorder CmpPmenuBorder
 	highlight! link Pmenu CmpPmenu
@@ -72,28 +70,7 @@ let maplocalleader = " " " filetype specifc leader key
 " Reload vims configuration file
 nnoremap <Leader>r :source ~/.config/nvim/init.vim<CR>
 
-" debugger
-nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
-nnoremap <silent> <F6> <Cmd>lua require'dap'.terminate()<CR>
-nnoremap <silent> <F10> <Cmd>lua require'dap'.step_over()<CR>                                                       
-nnoremap <silent> <F11> <Cmd>lua require'dap'.step_into()<CR>                                                       
-nnoremap <silent> <F12> <Cmd>lua require'dap'.step_out()<CR>                                                        
-nnoremap <silent> <leader>b <Cmd>lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <leader>d <Cmd>lua require'dap'.repl.toggle()<CR>
-nnoremap <silent> <leader>cl <Cmd>lua require'dap'.clear_breakpoints()<CR>
-nnoremap <silent> <leader>B <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>        
-nnoremap <silent> <leader>lp <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-nnoremap <silent> <leader>dr <Cmd>lua require'dap'.repl.open()<CR>                                                  
-nnoremap <silent> <leader>dl <Cmd>lua require'dap'.run_last()<CR>                                                   
-nnoremap <silent> <leader>du <Cmd>lua require'dapui'.toggle()<CR>                                                   
-
 " Vimtex settings
 let g:vimtex_view_general_viewer = 'okular'
 
-" Clipboard
-set clipboard=unnamed
-
-" colorscheme set to 0 to have transparent in transparent terminal
-let g:dracula_colorterm = 0
-set termguicolors
-colorscheme dracula
+lua require('leo310')
