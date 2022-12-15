@@ -1,5 +1,7 @@
 local db = require('dashboard')
 
+vim.keymap.set("n", "<leader>dd", ":Dashboard<CR>", { desc = 'Open Dashboard' })
+
 db.session_auto_save_on_exit = true
 db.session_directory = "~/.config/nvim/db"
 -- Close NerdTree buffer before auto-saving the current session

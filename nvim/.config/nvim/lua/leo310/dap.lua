@@ -25,7 +25,7 @@ vim.keymap.set("n", "<F10>", function() dap.step_into() end, { desc = 'Debugger 
 vim.keymap.set("n", "<F11>", function() dap.step_out() end, { desc = 'Debugger step out' })
 
 vim.keymap.set("n", "<leader>b", function() dap.toggle_breakpoint() end, { desc = 'Toggle Breakpoint' })
-vim.keymap.set("n", "<leader>d", function() dap.repl.toggle() end, { desc = 'Debugger REPL' })
+-- vim.keymap.set("n", "<leader>d", function() dap.repl.toggle() end, { desc = 'Debugger REPL' })
 vim.keymap.set("n", "<leader>cl", function() dap.clear_breakpoints() end, { desc = 'Clear Breakpoints' })
 vim.keymap.set("n", "<leader>B", function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
 	{ desc = 'Debugger step out' })
