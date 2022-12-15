@@ -1,5 +1,5 @@
 require 'tabline'.setup {
-	enable = true,
+	enable = false,
 	options = {
 		-- If lualine is installed tabline will use separators configured in lualine by default.
 		-- These options can be used to override those settings.

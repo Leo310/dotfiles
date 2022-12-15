@@ -64,25 +64,16 @@ return require('packer').startup(function(use)
 	use 'hrsh7th/vim-vsnip'
 	use 'hrsh7th/cmp-vsnip'
 	use 'rafamadriz/friendly-snippets'
-
 	-- Python
 	use 'mfussenegger/nvim-dap-python'
 	use 'jmcantrell/vim-virtualenv'
-
-	-- Golang setup
-	use { 'fatih/vim-go', ['do'] = ':GoUpdateBinaries' }
-
 	-- Typescript setup
 	use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-
 	-- Java setup
 	use 'mfussenegger/nvim-jdtls'
-
-	-- Git integration
-	use 'tpope/vim-fugitive'
-
-	-- Comments
-	use 'tpope/vim-commentary'
+	-- Latex
+	use 'lervag/vimtex'
+	use 'lewis6991/spellsitter.nvim'
 
 	-- Colorscheme
 	use { 'dracula/vim', as = 'dracula' }
@@ -106,15 +97,13 @@ return require('packer').startup(function(use)
 	use 'christoomey/vim-tmux-navigator'
 	use 'RyanMillerC/better-vim-tmux-resizer'
 
-	-- Latex
-	use 'lervag/vimtex'
-	use 'lewis6991/spellsitter.nvim'
-
 	-- utils
 	use 'jiangmiao/auto-pairs'
-	use 'luochen1990/rainbow'
 	use 'glepnir/dashboard-nvim'
 	use 'rcarriga/nvim-notify'
+	use 'tpope/vim-fugitive'
+	use 'tpope/vim-commentary'
+
 
 	if packer_bootstrap then
 		require('packer').sync()

@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = " " -- filetype specifc leader key
 vim.keymap.set("n", "zz", ":w<cr>", { desc = 'Better safe' })
 vim.keymap.set("i", "zz", "<ESC>:w<cr>", { desc = 'Better safe' })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = 'Up and center Screen' })
