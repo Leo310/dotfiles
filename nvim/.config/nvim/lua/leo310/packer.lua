@@ -64,6 +64,9 @@ return require('packer').startup(function(use)
 	use 'hrsh7th/vim-vsnip'
 	use 'hrsh7th/cmp-vsnip'
 	use 'rafamadriz/friendly-snippets'
+	-- null ls
+	use 'jose-elias-alvarez/typescript.nvim'
+	use 'jose-elias-alvarez/null-ls.nvim'
 	-- Python
 	use 'mfussenegger/nvim-dap-python'
 	use 'jmcantrell/vim-virtualenv'

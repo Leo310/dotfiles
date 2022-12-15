@@ -153,6 +153,11 @@ _G.packer_plugins = {
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/leo/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -228,11 +233,6 @@ _G.packer_plugins = {
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  rainbow = {
-    loaded = true,
-    path = "/home/leo/.local/share/nvim/site/pack/packer/start/rainbow",
-    url = "https://github.com/luochen1990/rainbow"
-  },
   ["spellsitter.nvim"] = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/spellsitter.nvim",
@@ -268,6 +268,11 @@ _G.packer_plugins = {
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
+  ["typescript.nvim"] = {
+    loaded = true,
+    path = "/home/leo/.local/share/nvim/site/pack/packer/start/typescript.nvim",
+    url = "https://github.com/jose-elias-alvarez/typescript.nvim"
+  },
   ["vim-commentary"] = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/vim-commentary",
@@ -277,11 +282,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/leo/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-go"] = {
-    loaded = true,
-    path = "/home/leo/.local/share/nvim/site/pack/packer/start/vim-go",
-    url = "https://github.com/fatih/vim-go"
   },
   ["vim-tmux-navigator"] = {
     loaded = true,

@@ -138,21 +138,24 @@ require('spellsitter').setup {
 -- GO setup
 -- setup ray-x/go.nvim
 
--- Typescript
-nvim_lsp.tsserver.setup({
-	capabilities = capabilities,
-	on_attach = function(client, bufnr)
-		local ts_utils = require("nvim-lsp-ts-utils")
-		ts_utils.setup({})
-		ts_utils.setup_client(client)
-		on_attach(client, bufnr)
-		local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+local null_ls = require("null-ls")
+null_ls.setup({
+	sources = {
+		null_ls.builtins.diagnostics.eslint,
+		require("typescript.extensions.null-ls.code-actions"),
 
-		local opts = { noremap = true, silent = true }
-		buf_set_keymap('n', "gO", ":TSLspOrganize<CR>", opts)
-		buf_set_keymap('n', "gI", ":TSLspImportAll<CR>", opts)
-		buf_set_keymap('n', "gn", ":TSLspRenameFile<CR>", opts)
-	end,
+	},
+})
+
+require("typescript").setup({
+	disable_commands = false, -- prevent the plugin from creating Vim commands
+	debug = false, -- enable debug logging for commands
+	go_to_source_definition = {
+		fallback = true, -- fall back to standard LSP definition on failure
+	},
+	server = { -- pass options to lspconfig's setup method
+		on_attach = on_attach,
+	},
 })
 
 require 'lspconfig'.bashls.setup {

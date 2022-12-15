@@ -1,5 +1,4 @@
-vim.cmd([[call SetJavaOptions()]])
-
+-- MAYBE NEED THIS? vim.cmd([[call SetJavaOptions()]])
 
 vim.notify = require('notify')
 local on_attach = function(client, bufnr)
