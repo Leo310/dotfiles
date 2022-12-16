@@ -23,6 +23,7 @@ local nvim_lsp = require('lspconfig')
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.offsetEncoding = { "utf-16" } -- Because of this shit: https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
 
 vim.notify = require('notify')
 local on_attach = function(client, bufnr)
@@ -136,15 +137,26 @@ require('spellsitter').setup {
 }
 
 -- GO setup
--- setup ray-x/go.nvim
+-- setup ray-x/go.nvim or nullls?
 
+local with_root_file = function(builtin, file)
+	return builtin.with {
+		condition = function(utils)
+			return utils.root_has_file(file)
+		end,
+	}
+end
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
+		-- formatting
+		with_root_file(null_ls.builtins.formatting.prettier, ".prettierrc"),
+
 		null_ls.builtins.diagnostics.eslint,
 		require("typescript.extensions.null-ls.code-actions"),
 
 	},
+	on_attach = on_attach,
 })
 
 require("typescript").setup({
@@ -153,12 +165,15 @@ require("typescript").setup({
 	go_to_source_definition = {
 		fallback = true, -- fall back to standard LSP definition on failure
 	},
-	server = { -- pass options to lspconfig's setup method
-		on_attach = on_attach,
-	},
 })
 
 require 'lspconfig'.bashls.setup {
+	on_attach = on_attach,
+	capabilities = capabilities,
+}
+
+-- C/C++ setup
+require('lspconfig').clangd.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
