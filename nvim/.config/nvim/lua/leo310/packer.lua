@@ -106,6 +106,7 @@ return require('packer').startup(function(use)
 	use 'rcarriga/nvim-notify'
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-commentary'
+	use 'gpanders/editorconfig.nvim'
 
 
 	if packer_bootstrap then

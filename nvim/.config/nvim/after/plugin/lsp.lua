@@ -25,9 +25,13 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.offsetEncoding = { "utf-16" } -- Because of this shit: https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
 
+
 vim.notify = require('notify')
 local on_attach = function(client, bufnr)
 	vim.notify(string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()), "info", { title = "[lsp] Active" }, true)
+
+	-- Null ls takes care of it
+	client.server_capabilities.document_formatting = false
 
 	local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -150,7 +154,7 @@ local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
 		-- formatting
-		with_root_file(null_ls.builtins.formatting.prettier, ".prettierrc"),
+		null_ls.builtins.formatting.prettier,
 
 		null_ls.builtins.diagnostics.eslint,
 		require("typescript.extensions.null-ls.code-actions"),
