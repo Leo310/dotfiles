@@ -66,9 +66,6 @@ local on_attach = function(client, bufnr)
 	-- Set autocommands conditional on server_capabilities
 	if client.server_capabilities.documentHighlightProvider then
 		vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=DarkMagenta guibg=LightYellow
-      hi LspReferenceText cterm=bold ctermbg=DarkMagenta guibg=LightYellow
-      hi LspReferenceWrite cterm=bold ctermbg=DarkMagenta guibg=LightYellow
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
@@ -143,13 +140,6 @@ require('spellsitter').setup {
 -- GO setup
 -- setup ray-x/go.nvim or nullls?
 
-local with_root_file = function(builtin, file)
-	return builtin.with {
-		condition = function(utils)
-			return utils.root_has_file(file)
-		end,
-	}
-end
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
