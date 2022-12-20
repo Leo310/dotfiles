@@ -27,7 +27,6 @@ require('telescope').setup({
 				["<C-l>"] = actions.move_to_bottom,
 				["<C-u>"] = actions.preview_scrolling_up,
 				["<C-n>"] = actions.preview_scrolling_down,
-				["<c-x>"] = trouble.open_with_trouble,
 			},
 			n = {
 				["<c-x>"] = trouble.open_with_trouble,
