@@ -1,5 +1,6 @@
 local dap, dapui = require("dap"), require("dapui")
 require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
+require('dap-go').setup()
 
 dapui.setup()
 

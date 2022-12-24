@@ -77,6 +77,9 @@ return require('packer').startup(function(use)
 	-- Latex
 	use 'lervag/vimtex'
 	use 'lewis6991/spellsitter.nvim'
+	-- Go
+	use 'ray-x/go.nvim'
+	use 'leoluz/nvim-dap-go'
 
 	-- Colorscheme
 	use { 'dracula/vim', as = 'dracula' }
@@ -107,6 +110,12 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-fugitive'
 	use 'tpope/vim-commentary'
 	use 'gpanders/editorconfig.nvim'
+	use({ "jackMort/ChatGPT.nvim", requires = {
+		"MunifTanjim/nui.nvim",
+		"nvim-lua/plenary.nvim",
+		"nvim-telescope/telescope.nvim"
+	} })
+	use 'ThePrimeagen/refactoring.nvim'
 
 
 	if packer_bootstrap then

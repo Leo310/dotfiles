@@ -75,8 +75,36 @@ local on_attach = function(client, bufnr)
 	end
 end
 
+-- Spellcheck on top of native
+require('spellsitter').setup {
+	enable = true,
+	filetypes = { "tex" },
+}
+
+local null_ls = require("null-ls")
+null_ls.setup({
+	sources = {
+		-- formatting
+		null_ls.builtins.formatting.prettier,
+
+		null_ls.builtins.diagnostics.eslint,
+		null_ls.builtins.code_actions.refactoring,
+		require("typescript.extensions.null-ls.code-actions"),
+
+	},
+	on_attach = on_attach,
+})
+
+require("typescript").setup({
+	disable_commands = false, -- prevent the plugin from creating Vim commands
+	debug = false, -- enable debug logging for commands
+	go_to_source_definition = {
+		fallback = true, -- fall back to standard LSP definition on failure
+	},
+})
+
 -- python
-require 'lspconfig'.pylsp.setup {
+nvim_lsp.pylsp.setup {
 	cmd = { "pylsp" },
 	filetypes = { "python" },
 	settings = { -- for more settings: https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
@@ -120,7 +148,7 @@ require 'lspconfig'.pylsp.setup {
 }
 
 -- Latex setup
-require 'lspconfig'.ltex.setup {
+nvim_lsp.ltex.setup {
 	cmd = { 'texlab' },
 	filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" },
 	settings = {
@@ -131,49 +159,28 @@ require 'lspconfig'.ltex.setup {
 	capabilities = capabilities,
 }
 
--- Spellcheck on top of native
-require('spellsitter').setup {
-	enable = true,
-	filetypes = { "tex" },
-}
 
 -- GO setup
--- setup ray-x/go.nvim or nullls?
-
-local null_ls = require("null-ls")
-null_ls.setup({
-	sources = {
-		-- formatting
-		null_ls.builtins.formatting.prettier,
-
-		null_ls.builtins.diagnostics.eslint,
-		require("typescript.extensions.null-ls.code-actions"),
-
-	},
-	on_attach = on_attach,
+require("go").setup({
+	lsp_cfg = {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	}
 })
 
-require("typescript").setup({
-	disable_commands = false, -- prevent the plugin from creating Vim commands
-	debug = false, -- enable debug logging for commands
-	go_to_source_definition = {
-		fallback = true, -- fall back to standard LSP definition on failure
-	},
-})
-
-require 'lspconfig'.bashls.setup {
+nvim_lsp.bashls.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
 
 -- C/C++ setup
-require('lspconfig').clangd.setup {
+nvim_lsp.clangd.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
 
 -- lua
-require("lspconfig").sumneko_lua.setup({
+nvim_lsp.sumneko_lua.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
