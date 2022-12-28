@@ -116,6 +116,8 @@ return require('packer').startup(function(use)
 		"nvim-telescope/telescope.nvim"
 	} })
 	use 'ThePrimeagen/refactoring.nvim'
+	use 'williamboman/mason.nvim'
+	use 'mbbill/undotree'
 
 
 	if packer_bootstrap then
