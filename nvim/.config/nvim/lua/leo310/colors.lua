@@ -6,27 +6,28 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
 
 			hi link TreesitterContext PmenuSel
 
-			hi default link DashboardCenter DraculaYellow
-			hi default link DashboardFooter DraculaPurple
-			hi default link DapUIVariable Normal
-			hi default link DapUIScope DraculaPurple
-			hi default link DapUIType DraculaPurple
-			hi default link DapUIDecoration DraculaCyan
-			hi default link DapUIThread DraculaGreen
-			hi default link DapUIStoppedThread DraculaCyan
-			hi default link DapUIFrameName Normal
-			hi default link DapUISource DraculaPurple
-			hi default link DapUILineNumber DraculaCyan
-			hi default link DapUIFloatBorder DraculaCyan
-			hi default link DapUIWatchesHeader DraculaCyan
-			hi default link DapUIWatchesEmpty DraculaOrange
-			hi default link DapUIWatchesValue DraculaGreen
-			hi default link DapUIWatchesError DraculaError
-			hi default link DapUIWatchesFrame DraculaPurple
-			hi default link DapUIBreakpointsPath DraculaCyan
-			hi default link DapUIBreakpointsInfo DraculaGreen
-			hi default link DapUIBreakpointsCurrentLine DraculaGreenBold
-			hi default link DapUIBreakpointsLine DapUILineNumber
+			hi link DashboardCenter DraculaYellow
+			hi link DashboardFooter DraculaPurple
+
+			hi link DapUIVariable Normal
+			hi link DapUIScope DraculaPurple
+			hi link DapUIType DraculaPurple
+			hi link DapUIDecoration DraculaCyan
+			hi link DapUIThread DraculaGreen
+			hi link DapUIStoppedThread DraculaCyan
+			hi link DapUIFrameName Normal
+			hi link DapUISource DraculaPurple
+			hi link DapUILineNumber DraculaCyan
+			hi link DapUIFloatBorder DraculaCyan
+			hi link DapUIWatchesHeader DraculaCyan
+			hi link DapUIWatchesEmpty DraculaOrange
+			hi link DapUIWatchesValue DraculaGreen
+			hi link DapUIWatchesError DraculaError
+			hi link DapUIWatchesFrame DraculaPurple
+			hi link DapUIBreakpointsPath DraculaCyan
+			hi link DapUIBreakpointsInfo DraculaGreen
+			hi link DapUIBreakpointsCurrentLine DraculaGreenBold
+			hi link DapUIBreakpointsLine DapUILineNumber
 
 			hi link LspReferenceRead DraculaSelection
 		    hi link LspReferenceWrite DraculaSelection
@@ -34,7 +35,3 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
 	  ]])
 	end,
 })
-
--- colorscheme set to 0 to have transparent in transparent terminal
-vim.g.dracula_colorterm = 0
-vim.cmd('colorscheme dracula')
