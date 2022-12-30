@@ -18,7 +18,6 @@ return {
 		'ray-x/go.nvim',
 	},
 	config = function()
-		-- LSP server config
 		local border = {
 			{ "╭", "FloatBorder" },
 			{ "─", "FloatBorder" },
@@ -29,9 +28,6 @@ return {
 			{ "╰", "FloatBorder" },
 			{ "│", "FloatBorder" },
 		}
-
-		-- LSP settings (for overriding per client)
-		vim.lsp.set_log_level('info')
 		local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 		function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 			opts = opts or {}
@@ -39,7 +35,13 @@ return {
 			return orig_util_open_floating_preview(contents, syntax, opts, ...)
 		end
 
+		-- Border around LSPInfo
+		require('lspconfig.ui.windows').default_options = {
+			border = border
+		}
+		-- LSP server config
 		local nvim_lsp = require('lspconfig')
+		vim.lsp.set_log_level('info')
 
 		local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 		capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -112,6 +114,7 @@ return {
 				require("typescript.extensions.null-ls.code-actions"),
 
 			},
+			border = "rounded",
 			on_attach = on_attach,
 		})
 
