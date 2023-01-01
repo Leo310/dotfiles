@@ -14,6 +14,7 @@ local M = {
 }
 function M.init()
 	-- Keymaps
+	local dap, dapui = require("dap"), require("dapui")
 	vim.keymap.set("n", "<F5>", function() dap.continue() end, { desc = 'Debugger continue' })
 	vim.keymap.set("n", "<F6>", function() dap.terminate() end, { desc = 'Debugger terminate' })
 	vim.keymap.set("n", "<F9>", function() dap.step_over() end, { desc = 'Debugger step over' })
@@ -28,7 +29,7 @@ function M.init()
 	vim.keymap.set("n", "<leader>lp", function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end,
 		{ desc = 'Log point message' })
 	vim.keymap.set("n", "<leader>dl", function() dap.run_last() end, { desc = 'Debugger re-run' })
-	vim.keymap.set("n", "<leader>du", function() dapui.toggle() end, { desc = 'Toggle Dapui' })
+	vim.keymap.set("n", "<leader>du", function() dapui.toggle({}) end, { desc = 'Toggle Dapui' })
 end
 
 function M.config()
@@ -37,13 +38,13 @@ function M.config()
 
 	local dap, dapui = require("dap"), require("dapui")
 	dap.listeners.after.event_initialized["dapui_config"] = function()
-		dapui.open()
+		dapui.open({})
 	end
 	dap.listeners.before.event_terminated["dapui_config"] = function()
-		dapui.close()
+		dapui.close({})
 	end
 	dap.listeners.before.event_exited["dapui_config"] = function()
-		dapui.close()
+		dapui.close({})
 	end
 
 	vim.fn.sign_define('DapBreakpoint', { text = 'ﭦ', texthl = '', linehl = '', numhl = '' })

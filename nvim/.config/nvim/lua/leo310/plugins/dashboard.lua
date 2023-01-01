@@ -5,7 +5,8 @@ return {
 		vim.keymap.set("n", "<leader>dd", ":Dashboard<CR>", { desc = 'Open Dashboard' })
 
 		db.session_auto_save_on_exit = true
-		db.session_directory = "~/.config/nvim/db"
+		db.session_directory = vim.fn.stdpath('cache') .. "/session"
+		db.session_verbose = true
 		-- Close NerdTree buffer before auto-saving the current session
 		vim.api.nvim_create_autocmd('User', {
 			pattern = 'DBSessionSavePre',
