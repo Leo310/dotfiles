@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
 # ==========================
@@ -7,7 +8,7 @@
 # $- prints the current set of options in your current shell. If not running interactively, don't do anything. Only for ssh and remote shiet
 case $- in
     *i*) ;;
-      *) return;;
+    *) return ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -37,9 +38,9 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # better cd
 FILE=~/z.sh
 if test -f "$FILE"; then
-	. $FILE
+    . $FILE
 else
-	echo "Stow z.sh (util) from dotfiles"
+    echo "Stow z.sh (util) from dotfiles"
 fi
 
 # git autocompletion
@@ -59,7 +60,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes ;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -69,12 +70,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -87,14 +88,14 @@ if [ "$color_prompt" = yes ]; then
     info_color='\[\033[1;34m\]'
     prompt_symbol=😈
     if [ "$EUID" -eq 0 ]; then # Change prompt colors for root user
-      prompt_color='\[\033[;94m\]'
-      info_color='\[\033[1;31m\]'
-      prompt_symbol=👽
+        prompt_color='\[\033[;94m\]'
+        info_color='\[\033[1;31m\]'
+        prompt_symbol=👽
     fi
-	if [ -n "$SSH_CLIENT" ]; then 
-    text=" ssh"
-	fi
-	PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u${prompt_symbol}\h'$prompt_color')$(parse_git_branch)-[\[\033[0;1m\]\w'$prompt_color']${text}\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
+    if [ -n "$SSH_CLIENT" ]; then
+        text=" ssh"
+    fi
+    PS1=$prompt_color'┌──${debian_chroot:+($debian_chroot)──}('$info_color'\u${prompt_symbol}\h'$prompt_color')$(parse_git_branch)-[\[\033[0;1m\]\w'$prompt_color']${text}\n'$prompt_color'└─'$info_color'\$\[\033[0m\] '
     # BackTrack red prompt
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
@@ -104,12 +105,12 @@ unset color_prompt force_color_prompt
 
 # auto exec tmux and neofetch
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-	alias tmux='tmux -2' # forces tmux to use full 256 colors
+    alias tmux='tmux -2' # forces tmux to use full 256 colors
 
-	exec tmux new -As 0
-elif ! command -v tmux &> /dev/null 
+    exec tmux new -As 0
+elif ! command -v tmux &> /dev/null
 then
-	echo "Install tmux"
+    echo "Install tmux"
 fi
 
 
@@ -120,12 +121,12 @@ fi
 
 # different color in ssh shell
 myssh() {
-	if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
-		# in tmux
-		printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Ssh"
+    if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+        # in tmux
+        printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Ssh"
 		# remote clipboard
 		ssh $1 -R 5556:localhost:5556
-		printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Dracula"
+    printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Dracula"
 	else
 		# not in tmux
 		konsoleprofile colors=Ssh

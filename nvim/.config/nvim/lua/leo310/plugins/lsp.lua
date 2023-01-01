@@ -110,7 +110,10 @@ return {
 				-- formatting
 				null_ls.builtins.formatting.prettier,
 
-				null_ls.builtins.diagnostics.eslint,
+				null_ls.builtins.formatting.beautysh,
+				null_ls.builtins.code_actions.shellcheck,
+				null_ls.builtins.diagnostics.shellcheck,
+
 				null_ls.builtins.code_actions.refactoring,
 				require("typescript.extensions.null-ls.code-actions"),
 

@@ -4,7 +4,6 @@ return {
 	dependencies = {
 		'nvim-telescope/telescope-fzy-native.nvim',
 		'nvim-telescope/telescope-ui-select.nvim',
-		'nvim-telescope/telescope-project.nvim',
 	},
 	init = function()
 		-- Keymaps
@@ -15,8 +14,6 @@ return {
 		vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>")
 		vim.keymap.set("n", "<leader>t", ":Telescope treesitter<CR>")
 		vim.keymap.set("n", "<leader>wd", ":Telescope diagnostics<CR>")
-		vim.keymap.set("n", "<leader>ws", ":Telescope project<CR>")
-
 	end,
 	config = function()
 		local actions = require("telescope.actions")
@@ -81,7 +78,6 @@ return {
 
 		require('telescope').load_extension('fzy_native')
 		require("telescope").load_extension("ui-select")
-		require("telescope").load_extension("project")
 		require("telescope").load_extension("notify")
 	end
 }
