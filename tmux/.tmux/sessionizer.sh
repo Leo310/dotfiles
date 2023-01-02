@@ -5,7 +5,8 @@ if [[ $# -eq 1 ]]; then
 else
     # to add dotfiles directoy i added a symlink of dotfiles to the project folder
     # and use the -L flag to also find symlnks
-    selected=$(find -L ~/Projects -mindepth 1 -maxdepth 1 -type d | fzf)
+    export FZF_DEFAULT_OPTS='--height 100% --layout=reverse --border --color=fg:#f8f8f2,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+    selected=$(find -L ~/Projects ~/Projects/lernfair -mindepth 1 -maxdepth 1 -type d | fzf --bind 'K:up,J:down')
 fi
 
 if [[ -z $selected ]]; then
