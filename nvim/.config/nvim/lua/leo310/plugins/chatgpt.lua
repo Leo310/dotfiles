@@ -1,8 +1,8 @@
 return {
-	"MunifTanjim/nui.nvim",
+	"jackMort/ChatGPT.nvim",
 	-- cmd = 'ChatGPT',
 	dependencies = {
-		"jackMort/ChatGPT.nvim",
+		"MunifTanjim/nui.nvim",
 	},
 	config = function()
 		require('chatgpt').setup({

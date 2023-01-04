@@ -67,7 +67,7 @@ return {
 			buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 			buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
 			buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-			buf_set_keymap('n', '<leader>K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+			buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
 			buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
 			buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
 			buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -130,6 +130,32 @@ return {
 			},
 		})
 
+		-- GO setup
+		require("go").setup({
+			lsp_cfg = {
+				on_attach = on_attach,
+				capabilities = capabilities,
+			}
+		})
+
+		require("neodev").setup()
+		nvim_lsp.sumneko_lua.setup {
+			settings = {
+				Lua = {
+					workspace = {
+						checkThirdParty = false,
+					},
+				},
+			},
+		}
+
+		local get_servers = require('mason-lspconfig').get_installed_servers
+		for _, server_name in ipairs(get_servers()) do
+			nvim_lsp[server_name].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+		end
 		-- python
 		nvim_lsp.pylsp.setup {
 			cmd = { "pylsp" },
@@ -186,35 +212,6 @@ return {
 			capabilities = capabilities,
 		}
 
-
-		-- GO setup
-		require("go").setup({
-			lsp_cfg = {
-				on_attach = on_attach,
-				capabilities = capabilities,
-			}
-		})
-
-		nvim_lsp.bashls.setup {
-			on_attach = on_attach,
-			capabilities = capabilities,
-		}
-
-		-- C/C++ setup
-		nvim_lsp.clangd.setup {
-			on_attach = on_attach,
-			capabilities = capabilities,
-		}
-
-		-- lua
-		require("neodev").setup()
-		nvim_lsp.sumneko_lua.setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-			settings = {
-				Lua = {},
-			},
-		})
 	end
 
 }

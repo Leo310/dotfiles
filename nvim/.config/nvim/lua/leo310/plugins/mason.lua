@@ -1,6 +1,16 @@
 return {
 	"williamboman/mason.nvim",
+	dependencies = {
+		'williamboman/mason-lspconfig'
+	},
 	config = function()
+		require('mason-lspconfig').setup({
+			ensure_installed = {
+				'sumneko_lua',
+				'tsserver',
+				'clangd',
+			}
+		})
 		require("mason").setup({
 			-- The directory in which to install packages.
 			log_level = vim.log.levels.INFO,

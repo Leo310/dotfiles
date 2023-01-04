@@ -1,5 +1,14 @@
 return {
 	'glepnir/dashboard-nvim',
+	init = function()
+		-- Close NerdTree buffer before auto-saving the current session
+		vim.api.nvim_create_autocmd('User', {
+			pattern = 'DBSessionSavePre',
+			callback = function()
+				vim.cmd('NvimTreeClose')
+			end,
+		})
+	end,
 	config = function()
 		local db = require('dashboard')
 		vim.keymap.set("n", "<leader>dd", ":Dashboard<CR>", { desc = 'Open Dashboard' })
@@ -7,13 +16,6 @@ return {
 		db.session_auto_save_on_exit = true
 		db.session_directory = vim.fn.stdpath('cache') .. "/session"
 		db.session_verbose = true
-		-- Close NerdTree buffer before auto-saving the current session
-		vim.api.nvim_create_autocmd('User', {
-			pattern = 'DBSessionSavePre',
-			callback = function()
-				pcall(vim.cmd, 'NvimTreeClose')
-			end,
-		})
 
 		db.footer_pad = 4
 		db.custom_footer = { '🪩 To the moon!!! 🚀' }
@@ -31,7 +33,7 @@ return {
 		db.preview_command = 'chafa -c full --fg-only --speed ' .. speed .. ' --symbols braille'
 
 		db.custom_center = {
-			{ icon = '  ', desc = 'Find file	             ', action = 'Telescope find_files' },
+			{ icon = '  ', desc = 'Find file	           ', action = 'Telescope find_files' },
 			{ icon = '  ', desc = 'Recently latest session', action = 'SessionLoad' },
 			{ icon = '  ', desc = 'My Projects            ', action = '!tmux neww ~/.tmux/sessionizer.sh' },
 			{ icon = '  ', desc = 'New file               ', action = 'DashboardNewFile' },
