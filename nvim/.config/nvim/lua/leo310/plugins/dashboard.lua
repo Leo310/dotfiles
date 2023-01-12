@@ -33,7 +33,7 @@ return {
 		db.preview_command = 'chafa -c full --fg-only --speed ' .. speed .. ' --symbols braille'
 
 		db.custom_center = {
-			{ icon = '  ', desc = 'Find file	           ', action = 'Telescope find_files' },
+			{ icon = '  ', desc = 'Find file              ', action = 'Telescope find_files' },
 			{ icon = '  ', desc = 'Recently latest session', action = 'SessionLoad' },
 			{ icon = '  ', desc = 'My Projects            ', action = '!tmux neww ~/.tmux/sessionizer.sh' },
 			{ icon = '  ', desc = 'New file               ', action = 'DashboardNewFile' },
