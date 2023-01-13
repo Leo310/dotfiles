@@ -7,9 +7,8 @@ return {
         'onsails/lspkind.nvim', -- icons of functions. can also define own icons (lookup nvim-cmp wiki -> cuztomize appearance)
         'hrsh7th/cmp-cmdline',
         'hrsh7th/cmp-path',
-        -- Vsnip
-        'hrsh7th/vim-vsnip',
-        'hrsh7th/cmp-vsnip',
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
         'rafamadriz/friendly-snippets',
     },
     config = function()
@@ -24,18 +23,17 @@ return {
         end
 
         vim.opt.completeopt = "menu,menuone,noselect"
+        local luasnip = require("luasnip")
+        luasnip.filetype_extend("javascript", { "html" })
+        luasnip.filetype_extend("javascriptreact", { "html" })
+        luasnip.filetype_extend("typescriptreact", { "html" })
+        require("luasnip.loaders.from_vscode").lazy_load()
+
 
         cmp.setup({
             snippet = {
                 expand = function(args)
-                    -- For `vsnip` user.
-                    vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
-
-                    -- For `luasnip` user.
-                    -- require('luasnip').lsp_expand(args.body)
-
-                    -- For `ultisnips` user.
-                    -- vim.fn["UltiSnips#Anon"](args.body)
+                    require('luasnip').lsp_expand(args.body)
                 end,
             },
             window = {
@@ -72,7 +70,7 @@ return {
                         buffer = "B﬘",
                         copilot = "",
                         zsh = "",
-                        vsnip = "",
+                        luasnip = "",
                         spell = "暈",
                     })[entry.source.name]
                     if vim_item.menu ~= nil then
@@ -96,11 +94,11 @@ return {
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
             },
             sources = {
-                { name = 'path' },
+                { name = 'luasnip' },
                 { name = "copilot" },
                 { name = 'nvim_lsp' },
-                { name = 'vsnip' },
                 { name = 'buffer' },
+                { name = 'path' },
             }
         })
 
