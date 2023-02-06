@@ -82,12 +82,7 @@ return {
                 end,
             },
             view = {
-                entries = { name = 'custom', selection_order = 'bottom_up' }
-            },
-            appearance = {
-                menu = {
-                    direction = 'above' -- auto or above or below
-                }
+                entries = { name = 'custom', selection_order = 'near_cursor' }
             },
             mapping = {
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -95,7 +90,22 @@ return {
                 ['<Tab>'] = cmp.mapping.select_next_item(),
                 ['<S-Tab>'] = cmp.mapping.select_prev_item(),
                 ['<C-Space>'] = cmp.mapping.complete({}),
-                ['<C-e>'] = cmp.mapping.close(),
+                ['<C-e>'] = cmp.mapping({
+                    i = function()
+                        if cmp.visible() then
+                            cmp.abort()
+                        else
+                            cmp.complete()
+                        end
+                    end,
+                    c = function()
+                        if cmp.visible() then
+                            cmp.close()
+                        else
+                            cmp.complete()
+                        end
+                    end,
+                }),
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
             },
             sources = {
