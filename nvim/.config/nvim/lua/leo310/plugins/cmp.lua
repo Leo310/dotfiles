@@ -82,7 +82,12 @@ return {
                 end,
             },
             view = {
-                entries = { name = 'custom', selection_order = 'near_cursor' }
+                entries = { name = 'custom', selection_order = 'bottom_up' }
+            },
+            appearance = {
+                menu = {
+                    direction = 'above' -- auto or above or below
+                }
             },
             mapping = {
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -94,7 +99,7 @@ return {
                 ['<CR>'] = cmp.mapping.confirm({ select = true }),
             },
             sources = {
-                { name = "copilot" },
+                -- { name = "copilot" },
                 { name = 'luasnip' },
                 { name = 'nvim_lsp' },
                 { name = 'buffer' },
