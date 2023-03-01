@@ -110,7 +110,7 @@ return {
             },
             sources = {
                 -- { name = "copilot" },
-                { name = 'luasnip' },
+                -- { name = 'luasnip' },
                 { name = 'nvim_lsp' },
                 { name = 'buffer' },
                 { name = 'path' },

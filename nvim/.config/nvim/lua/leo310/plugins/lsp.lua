@@ -1,22 +1,22 @@
 return {
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
         -- null ls
-        'jose-elias-alvarez/typescript.nvim',
-        'jose-elias-alvarez/null-ls.nvim',
+        "jose-elias-alvarez/typescript.nvim",
+        "jose-elias-alvarez/null-ls.nvim",
         -- Python
-        'jmcantrell/vim-virtualenv',
+        "jmcantrell/vim-virtualenv",
         -- Typescript setup
-        'jose-elias-alvarez/nvim-lsp-ts-utils',
+        "jose-elias-alvarez/nvim-lsp-ts-utils",
         -- Java setup
-        'mfussenegger/nvim-jdtls',
+        "mfussenegger/nvim-jdtls",
         -- Latex
-        'lervag/vimtex',
-        'lewis6991/spellsitter.nvim',
+        "lervag/vimtex",
+        "lewis6991/spellsitter.nvim",
         -- Go
-        'ray-x/go.nvim',
-        'folke/neodev.nvim'
+        "ray-x/go.nvim",
+        "folke/neodev.nvim",
     },
     config = function()
         local border = {
@@ -37,74 +37,106 @@ return {
         end
 
         -- Border around LSPInfo
-        require('lspconfig.ui.windows').default_options = {
-            border = border
+        require("lspconfig.ui.windows").default_options = {
+            border = border,
         }
         -- LSP server config
-        local nvim_lsp = require('lspconfig')
-        vim.lsp.set_log_level('info')
+        local nvim_lsp = require("lspconfig")
+        vim.lsp.set_log_level("info")
 
-        local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
+        local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+        -- capabilities.textDocument.completion.completionItem.snippetSupport = true
         capabilities.offsetEncoding = { "utf-16" } -- Because of this shit: https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
 
+        local lsp_formatting = function(bufnr)
+            vim.lsp.buf.format({
+                filter = function(client)
+                    -- apply whatever logic you want (in this example, we'll only use null-ls)
+                    return client.name == "null-ls"
+                end,
+                bufnr = bufnr,
+            })
+        end
+        -- if you want to set up formatting on save, you can use this as a callback
+        local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-        vim.notify = require('notify')
+        vim.notify = require("notify")
         local on_attach = function(client, bufnr)
-            vim.notify(string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()), "info",
-                { title = "[lsp] Active" }, true)
+            vim.notify(
+                string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()),
+                "info",
+                { title = "[lsp] Active" },
+                true
+            )
 
             -- Null ls takes care of it
             client.server_capabilities.document_formatting = false
 
-            local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-
-            local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-            -- Mappings.
-            buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-            local opts = { noremap = true, silent = true }
-            buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-            buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-            buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-            buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-            buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-            buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-            buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-            buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
-                opts)
-            buf_set_keymap('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-            buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-            --  buf_set_keymap('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references({ initial_mode = "normal" })<CR>', opts)
-            buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-            buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-            buf_set_keymap('n', '<leader>N', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-            buf_set_keymap('n', '<leader>n', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-            buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-            buf_set_keymap('n', '<leader>gl', '<cmd>Telescope grep_string<CR>', opts)
-
-            if client.server_capabilities.documentFormattingProvider then
-                vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.format(nil, 2000)")
+            local function buf_set_keymap(...)
+                vim.api.nvim_buf_set_keymap(bufnr, ...)
             end
 
+            local function buf_set_option(...)
+                vim.api.nvim_buf_set_option(bufnr, ...)
+            end
+
+            -- Mappings.
+            buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+            local opts = { noremap = true, silent = true }
+            buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+            buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
+            buf_set_keymap("n", "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+            buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+            buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+            buf_set_keymap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
+            buf_set_keymap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
+            buf_set_keymap(
+                "n",
+                "<leader>wl",
+                "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+                opts
+            )
+            buf_set_keymap("n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+            buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+            --  buf_set_keymap('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references({ initial_mode = "normal" })<CR>', opts)
+            buf_set_keymap("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
+            buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+            buf_set_keymap("n", "<leader>N", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+            buf_set_keymap("n", "<leader>n", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+            buf_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+            buf_set_keymap("n", "<leader>gl", "<cmd>Telescope grep_string<CR>", opts)
+
+            if client.supports_method("textDocument/formatting") then
+                vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    group = augroup,
+                    buffer = bufnr,
+                    callback = function()
+                        lsp_formatting(bufnr)
+                    end,
+                })
+            end
             -- Set autocommands conditional on server_capabilities
             if client.server_capabilities.documentHighlightProvider then
-                vim.api.nvim_exec([[
+                vim.api.nvim_exec(
+                    [[
 				  augroup lsp_document_highlight
 					autocmd! * <buffer>
 					autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
 					autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
 				  augroup END
-				]]           , false)
+				]],
+                    false
+                )
             end
         end
 
         -- Spellcheck on top of native
-        require('spellsitter').setup {
+        require("spellsitter").setup({
             enable = true,
             filetypes = { "tex" },
-        }
+        })
 
         local null_ls = require("null-ls")
         null_ls.setup({
@@ -115,15 +147,18 @@ return {
                 null_ls.builtins.diagnostics.cpplint,
                 null_ls.builtins.formatting.clang_format,
 
+                null_ls.builtins.formatting.black,
+                null_ls.builtins.diagnostics.flake8,
+
                 null_ls.builtins.code_actions.gitsigns,
                 null_ls.builtins.diagnostics.chktex,
                 null_ls.builtins.formatting.beautysh,
                 null_ls.builtins.code_actions.shellcheck,
                 null_ls.builtins.diagnostics.shellcheck,
 
+                null_ls.builtins.formatting.stylua,
                 null_ls.builtins.code_actions.refactoring,
                 require("typescript.extensions.null-ls.code-actions"),
-
             },
             border = "rounded",
             on_attach = on_attach,
@@ -142,11 +177,11 @@ return {
             lsp_cfg = {
                 on_attach = on_attach,
                 capabilities = capabilities,
-            }
+            },
         })
 
         require("neodev").setup()
-        nvim_lsp.sumneko_lua.setup {
+        nvim_lsp.sumneko_lua.setup({
             settings = {
                 Lua = {
                     workspace = {
@@ -154,72 +189,28 @@ return {
                     },
                 },
             },
-        }
+        })
 
-        local get_servers = require('mason-lspconfig').get_installed_servers
+        local get_servers = require("mason-lspconfig").get_installed_servers
         for _, server_name in ipairs(get_servers()) do
             nvim_lsp[server_name].setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
             })
         end
-        -- python
-        nvim_lsp.pylsp.setup {
-            cmd = { "pylsp" },
-            filetypes = { "python" },
-            settings = { -- for more settings: https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-                pylsp = {
-                    plugins = {
-                        jedi_completion = {
-                            include_params = true, -- Auto-completes methods and classes with tabstops for each parameter.
-                            fuzzy = true,
-                        },
-                        flake8 = {
-                            enabled = true,
-                            ignore = {},
-                            maxLineLength = 88
-                        },
-                        -- NOT WORKING ATM
-                        -- black = {
-                        -- 	enabled = false,
-                        -- maxLineLength = 79
-                        -- },
-                        pycodestyle = { enabled = false },
-                        isort = { enabled = false },
-                        yapf = { enabled = false },
-                        pylint = {
-                            enabled = true,
-                            args = {
-                                "--generated-members=torch.*",
-                                "--extension-pkg-whitelist=pygame",
-                                "--variable-rgx='[a-z0-9_]{1,30}$'",
-                                "--argument-rgx='[a-z0-9_]{1,30}$'",
-                                "--disable=C0111"
-                            },
-                        },
-                        rope_completion = { enabled = false }
-                    },
-                }
-            },
-            capabilities = capabilities,
-            root_dir = nvim_lsp.util.root_pattern("venv", "pyproject.toml", "setup.py", "setup.cfg", "Pipfile",
-                "requirements.txt"),
-            single_file_support = true,
-            on_attach = on_attach,
-        }
+
+        vim.g.python_host_prog = "~/.virtualenvs/neovim/bin/python"
+        vim.g.python3_host_prog = "~/.virtualenvs/neovim/bin/python3"
 
         -- Latex setup
-        nvim_lsp.ltex.setup {
-            cmd = { 'texlab' },
+        nvim_lsp.ltex.setup({
+            cmd = { "texlab" },
             filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex" },
-            settings = {
-            },
+            settings = {},
             root_dir = nvim_lsp.util.root_pattern("main.tex"),
             on_attach = on_attach,
             single_file_support = true,
             capabilities = capabilities,
-        }
-
-    end
-
+        })
+    end,
 }
