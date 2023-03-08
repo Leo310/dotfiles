@@ -48,19 +48,22 @@ return {
         -- capabilities.textDocument.completion.completionItem.snippetSupport = true
         capabilities.offsetEncoding = { "utf-16" } -- Because of this shit: https://github.com/jose-elias-alvarez/null-ls.nvim/issues/428
 
-        local lsp_formatting = function(bufnr)
+        vim.notify = require("notify")
+        local function format(buf)
+            local ft = vim.bo[buf].filetype
+            local have_nls = #require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") > 0
             vim.lsp.buf.format({
                 filter = function(client)
                     -- apply whatever logic you want (in this example, we'll only use null-ls)
-                    return client.name == "null-ls"
+                    if have_nls then
+                        return client.name == "null-ls"
+                    end
+                    return client.name ~= "null-ls"
                 end,
-                bufnr = bufnr,
+                bufnr = buf,
             })
         end
-        -- if you want to set up formatting on save, you can use this as a callback
-        local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-        vim.notify = require("notify")
         local on_attach = function(client, bufnr)
             vim.notify(
                 string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()),
@@ -107,16 +110,14 @@ return {
             buf_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
             buf_set_keymap("n", "<leader>gl", "<cmd>Telescope grep_string<CR>", opts)
 
-            if client.supports_method("textDocument/formatting") then
-                vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    group = augroup,
-                    buffer = bufnr,
-                    callback = function()
-                        lsp_formatting(bufnr)
-                    end,
-                })
-            end
+            -- Format on save
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = vim.api.nvim_create_augroup("LspFormat." .. bufnr, {}),
+                buffer = bufnr,
+                callback = function()
+                    format(bufnr)
+                end,
+            })
             -- Set autocommands conditional on server_capabilities
             if client.server_capabilities.documentHighlightProvider then
                 vim.api.nvim_exec(
@@ -148,7 +149,7 @@ return {
                 null_ls.builtins.formatting.clang_format,
 
                 null_ls.builtins.formatting.black,
-                null_ls.builtins.diagnostics.flake8,
+                null_ls.builtins.diagnostics.ruff,
 
                 null_ls.builtins.code_actions.gitsigns,
                 null_ls.builtins.diagnostics.chktex,
@@ -157,7 +158,7 @@ return {
                 null_ls.builtins.diagnostics.shellcheck,
 
                 null_ls.builtins.formatting.stylua,
-                null_ls.builtins.code_actions.refactoring,
+                -- null_ls.builtins.code_actions.refactoring,
                 require("typescript.extensions.null-ls.code-actions"),
             },
             border = "rounded",
