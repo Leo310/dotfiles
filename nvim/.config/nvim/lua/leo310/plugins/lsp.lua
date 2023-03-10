@@ -5,8 +5,6 @@ return {
         -- null ls
         "jose-elias-alvarez/typescript.nvim",
         "jose-elias-alvarez/null-ls.nvim",
-        -- Python
-        "jmcantrell/vim-virtualenv",
         -- Typescript setup
         "jose-elias-alvarez/nvim-lsp-ts-utils",
         -- Java setup
@@ -42,7 +40,7 @@ return {
         }
         -- LSP server config
         local nvim_lsp = require("lspconfig")
-        vim.lsp.set_log_level("info")
+        -- vim.lsp.set_log_level("info")
 
         local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
         -- capabilities.textDocument.completion.completionItem.snippetSupport = true
