@@ -1,19 +1,21 @@
 return {
-	'dracula/vim',
-	name = 'dracula',
-	lazy = false,
-	priority = 999,
-	config = function()
-		-- colorscheme set to 0 to have transparent in transparent terminal
-		vim.api.nvim_create_autocmd({ "ColorScheme" }, {
-			pattern = "*", callback = function()
-				vim.cmd([[
+    "dracula/vim",
+    name = "dracula",
+    lazy = false,
+    priority = 999,
+    config = function()
+        -- colorscheme set to 0 to have transparent in transparent terminal
+        vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+            pattern = "*",
+            callback = function()
+                vim.cmd([[
 					hi link FloatBorder CmpPmenuBorder
 					hi! link Pmenu CmpPmenu
 
 					hi link TreesitterContext PmenuSel
 
-					hi link DashboardCenter DraculaYellow
+					hi link DashboardDesc DraculaYellow
+					hi link DashboardIcon DraculaCyan
 					hi link DashboardFooter DraculaPurple
 
 					hi link DapUIVariable Normal
@@ -40,9 +42,9 @@ return {
 					hi link LspReferenceWrite DraculaSelection
 					hi link LspReferenceText DraculaSelection
 			    ]])
-			end,
-		})
-		vim.g.dracula_colorterm = 0
-		vim.cmd('colorscheme dracula')
-	end
+            end,
+        })
+        vim.g.dracula_colorterm = 0
+        vim.cmd("colorscheme dracula")
+    end,
 }

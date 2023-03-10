@@ -2,11 +2,11 @@
 
 if command -v stow &> /dev/null
 then
-	echo "Stows every package"
-	for package in $(ls -d */)
-	do
-		stow $package	
-	done
+    echo "Stows every package"
+    for package in $(ls -d */)
+    do
+        stow $package
+    done
 else
-	echo "You need to install stow to run this script."
+    echo "You need to install stow to run this script."
 fi
