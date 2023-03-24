@@ -14,6 +14,7 @@ return {
         vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>")
         vim.keymap.set("n", "<leader>t", ":Telescope treesitter<CR>")
         vim.keymap.set("n", "<leader>wd", ":Telescope diagnostics<CR>")
+        vim.keymap.set("n", "<leader>hh", ":Telescope harpoon marks<CR>")
     end,
     config = function()
         local actions = require("telescope.actions")
@@ -78,5 +79,6 @@ return {
         require("telescope").load_extension("fzy_native")
         require("telescope").load_extension("ui-select")
         require("telescope").load_extension("notify")
+        require("telescope").load_extension("harpoon")
     end,
 }
