@@ -110,6 +110,7 @@ return {
 
             vim.cmd([[
                 autocmd BufRead,BufNewFile *.env lua vim.diagnostic.disable()
+                autocmd BufRead,BufNewFile .env lua vim.diagnostic.disable()
             ]])
             -- Format on save
             vim.api.nvim_create_autocmd("BufWritePre", {
@@ -149,6 +150,8 @@ return {
                 null_ls.builtins.diagnostics.cpplint,
                 null_ls.builtins.formatting.clang_format,
 
+                -- null_ls.builtins.diagnostics.solhint,
+
                 null_ls.builtins.formatting.black,
                 null_ls.builtins.diagnostics.ruff,
 
@@ -164,6 +167,15 @@ return {
             },
             border = "rounded",
             on_attach = on_attach,
+        })
+
+        nvim_lsp["solidity"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
+            filetypes = { "solidity" },
+            root_dir = nvim_lsp.util.root_pattern(".git", ".truffle-config.js"),
+            single_file_support = true,
         })
 
         require("typescript").setup({
