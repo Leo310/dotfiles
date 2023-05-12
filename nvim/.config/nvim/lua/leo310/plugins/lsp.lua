@@ -59,6 +59,7 @@ return {
                     return client.name ~= "null-ls"
                 end,
                 bufnr = buf,
+                timeout_ms = 2000,
             })
         end
 
@@ -146,6 +147,7 @@ return {
             sources = {
                 -- formatting
                 null_ls.builtins.formatting.prettier,
+                -- null_ls.builtins.diagnostics.eslint,
                 null_ls.builtins.formatting.latexindent,
                 null_ls.builtins.diagnostics.cpplint,
                 null_ls.builtins.formatting.clang_format,
