@@ -63,6 +63,11 @@ return {
             })
         end
 
+        vim.cmd([[
+            autocmd BufRead,BufNewFile *.env lua vim.diagnostic.disable()
+            autocmd BufRead,BufNewFile .env lua vim.diagnostic.disable()
+        ]])
+
         local on_attach = function(client, bufnr)
             vim.notify(
                 string.format("[lsp] %s\n[cwd] %s", client.name, vim.fn.getcwd()),
@@ -109,10 +114,6 @@ return {
             buf_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
             buf_set_keymap("n", "<leader>gl", "<cmd>Telescope grep_string<CR>", opts)
 
-            vim.cmd([[
-                autocmd BufRead,BufNewFile *.env lua vim.diagnostic.disable()
-                autocmd BufRead,BufNewFile .env lua vim.diagnostic.disable()
-            ]])
             -- Format on save
             vim.api.nvim_create_autocmd("BufWritePre", {
                 group = vim.api.nvim_create_augroup("LspFormat." .. bufnr, {}),
