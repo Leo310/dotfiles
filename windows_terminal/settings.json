@@ -36,7 +36,6 @@
   "copyFormatting": "none",
   "copyOnSelect": false,
   "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-  "experimental.rendering.forceFullRepaint": true,
   "launchMode": "focus",
   "profiles": {
     "defaults": {
@@ -49,8 +48,7 @@
         "face": "FiraCode NFM"
       },
       "opacity": 100,
-      "useAcrylic": true,
-      "useAtlasEngine": false
+      "useAcrylic": true
     },
     "list": [
       {
