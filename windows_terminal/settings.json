@@ -7,15 +7,21 @@
       "keys": "ctrl+shift+f"
     },
     {
-      "command": "paste",
-      "keys": "ctrl+v"
+      "command": "paste"
     },
     {
       "command": {
         "action": "copy",
         "singleLine": false
-      },
+      }
+    },
+    {
+      "command": "unbound",
       "keys": "ctrl+c"
+    },
+    {
+      "command": "unbound",
+      "keys": "ctrl+v"
     },
     {
       "command": {
@@ -30,11 +36,12 @@
   "copyFormatting": "none",
   "copyOnSelect": false,
   "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+  "experimental.rendering.forceFullRepaint": true,
   "launchMode": "focus",
   "profiles": {
     "defaults": {
       "backgroundImage": "C:\\Users\\I551991\\Pictures\\2k.jpg",
-      "backgroundImageOpacity": 0.15,
+      "backgroundImageOpacity": 0.12,
       "colorScheme": "Dracula",
       "cursorShape": "filledBox",
       "experimental.retroTerminalEffect": false,
@@ -42,7 +49,8 @@
         "face": "FiraCode NFM"
       },
       "opacity": 100,
-      "useAcrylic": false
+      "useAcrylic": true,
+      "useAtlasEngine": false
     },
     "list": [
       {
