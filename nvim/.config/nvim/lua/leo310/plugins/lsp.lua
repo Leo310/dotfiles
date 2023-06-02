@@ -59,7 +59,7 @@ return {
                     return client.name ~= "null-ls"
                 end,
                 bufnr = buf,
-                timeout_ms = 2000,
+                timeout_ms = 4000,
             })
         end
 
