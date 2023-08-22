@@ -58,6 +58,7 @@ return {
                     "%.glb",
                     "%.svg",
                     "%.webm",
+                    "%.webp",
                 },
             },
             pickers = {
