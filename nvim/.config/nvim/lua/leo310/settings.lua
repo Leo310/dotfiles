@@ -18,8 +18,6 @@ vim.opt.undofile = true
 
 vim.opt.fillchars = { eob = " " }
 
-vim.opt.termguicolors = true
-
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
