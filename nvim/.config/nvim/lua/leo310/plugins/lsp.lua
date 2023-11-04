@@ -155,8 +155,8 @@ return {
 
                 -- null_ls.builtins.diagnostics.solhint,
 
+                -- null_ls.builtins.diagnostics.ruff,
                 null_ls.builtins.formatting.black,
-                null_ls.builtins.diagnostics.ruff,
 
                 null_ls.builtins.code_actions.gitsigns,
                 null_ls.builtins.diagnostics.chktex,
@@ -183,9 +183,9 @@ return {
 
         require("typescript").setup({
             disable_commands = false, -- prevent the plugin from creating Vim commands
-            debug = false, -- enable debug logging for commands
+            debug = false,            -- enable debug logging for commands
             go_to_source_definition = {
-                fallback = true, -- fall back to standard LSP definition on failure
+                fallback = true,      -- fall back to standard LSP definition on failure
             },
         })
 
@@ -210,10 +210,41 @@ return {
 
         local get_servers = require("mason-lspconfig").get_installed_servers
         for _, server_name in ipairs(get_servers()) do
-            nvim_lsp[server_name].setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-            })
+            if server_name == "pylsp" then
+                nvim_lsp[server_name].setup({
+                    settings = {
+                        pylsp = {
+                            plugins = {
+                                pycodestyle = { enabled = false },
+                                pyflakes = { enabled = false },
+                                yapf = { enabled = false },
+                                mccabe = { enabled = false },
+                                autopep8 = { enabled = false },
+                                flake8 = { enabled = true },
+                                -- pylint = { enabled = true },
+                                --[[
+                                    Rope for Completions and renaming
+                                    Pyflakes linter to detect various errors
+                                    McCabe linter for complexity checking
+                                    pycodestyle linter for style checking
+                                    pydocstyle linter for docstring style checking (disabled by default)
+                                    autopep8 for code formatting
+                                    YAPF for code formatting (preferred over autopep8)
+                                    flake8 for error checking (disabled by default)
+                                    pylint for code linting (disabled by default)
+                                --]]
+                            },
+                        },
+                    },
+                    on_attach = on_attach,
+                    capabilities = capabilities,
+                })
+            else
+                nvim_lsp[server_name].setup({
+                    on_attach = on_attach,
+                    capabilities = capabilities,
+                })
+            end
         end
 
         vim.g.python_host_prog = "~/.virtualenvs/neovim/bin/python"
