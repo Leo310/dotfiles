@@ -44,7 +44,8 @@ else
 fi
 
 # git autocompletion
-source /usr/share/bash-completion/completions/git
+[[ -r "/usr/share/bash-completion/completions/git" ]] && source /usr/share/bash-completion/completions/git
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 export VISUAL=nvim
 export EDITOR=nvim
@@ -104,14 +105,14 @@ fi
 unset color_prompt force_color_prompt
 
 # auto exec tmux and neofetch
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    alias tmux='tmux -2' # forces tmux to use full 256 colors
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#     alias tmux='tmux -2' # forces tmux to use full 256 colors
 
-    exec tmux new -As 0
-elif ! command -v tmux &> /dev/null
-then
-    echo "Install tmux"
-fi
+#     exec tmux new -As 0
+# elif ! command -v tmux &> /dev/null
+# then
+#     echo "Install tmux"
+# fi
 
 
 
@@ -142,17 +143,9 @@ alias ssh='myssh'
 # ========  Neofetch =========
 # ==========================
 
-KONSOLE_INSTANCES=0
-for pid in $(pidof -x konsole); do
-	KONSOLE_INSTANCES=$((KONSOLE_INSTANCES+1))
-done
-
 TMUX_INSTANCES=$(($(tmux list-panes | wc -l) + $(tmux list-windows | wc -l)))
-# for pid in $(pidof -x tmux); do
-# 	TMUX_INSTANCES=$((TMUX_INSTANCES+1))
-# done
 
-if [ $KONSOLE_INSTANCES -le 1 ] && [ $TMUX_INSTANCES -le 2 ]; then
+if [ $TMUX_INSTANCES -le 2 ]; then
 	neofetch
 fi
 
@@ -162,6 +155,7 @@ fi
 # =====  Colored shiet =====
 # ==========================
 
+export CLICOLOR=1
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -183,3 +177,7 @@ if [ -x /usr/bin/dircolors ]; then
     export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
     export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 fi
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
