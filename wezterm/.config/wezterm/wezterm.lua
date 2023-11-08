@@ -11,6 +11,16 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+local tmux_path
+if wezterm.target_triple == "aarch64-apple-darwin" then
+	tmux_path = "/opt/homebrew/bin/tmux"
+else
+	tmux_path = "tmux"
+end
+local tmux = { tmux_path, "new", "-As0" }
+
+config.default_prog = tmux
+
 -- wezterm.gui is not available to the mux server, so take care to
 -- do something reasonable when this config is evaluated by the mux
 local function get_appearance()
@@ -22,7 +32,9 @@ end
 
 if get_appearance():find("Dark") then
 	config.color_scheme = "Dracula"
+	os.execute(tmux_path .. " source-file ~/.tmux.dark.conf")
 else
+	os.execute(tmux_path .. " source-file ~/.tmux.light.conf")
 	config.color_scheme = "Edge Light (base16)"
 	-- config.color_scheme = "Dracula"
 end
@@ -63,16 +75,9 @@ config.keys = {
 	{ key = "9", mods = "CMD", action = wezterm.action({ SendString = "\x029" }) },
 }
 
-local tmux = {}
-if wezterm.target_triple == "aarch64-apple-darwin" then
-	tmux = { "/opt/homebrew/bin/tmux", "new", "-As0" }
-else
-	tmux = { "tmux", "new", "-As0" }
-end
-
-config.default_prog = tmux
-
 config.hide_tab_bar_if_only_one_tab = true
+
+-- config.freetype_load_flags = "NO_HINTING"
 
 -- This is where you actually apply your config choices
 
