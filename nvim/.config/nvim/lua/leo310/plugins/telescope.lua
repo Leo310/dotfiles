@@ -4,6 +4,7 @@ return {
     dependencies = {
         "nvim-telescope/telescope-fzy-native.nvim",
         "nvim-telescope/telescope-ui-select.nvim",
+        "nvim-lua/plenary.nvim",
     },
     init = function()
         -- Keymaps

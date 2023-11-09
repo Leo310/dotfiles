@@ -1,5 +1,8 @@
 return {
     "nvim-tree/nvim-tree.lua",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+    },
     init = function()
         -- Keymaps
         vim.keymap.set("n", "<leader>v", ":NvimTreeFindFile<cr>", { desc = "Find File in Tree" })
