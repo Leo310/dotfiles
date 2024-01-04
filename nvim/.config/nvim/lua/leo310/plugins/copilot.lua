@@ -13,15 +13,15 @@ return {
                 auto_trigger = true,
                 enabled = true,
                 keymap = {
-                    accept = "<M-L>",
+                    accept = "<leader>L",
                     accept_word = false,
                     accept_line = false,
-                    next = "<M-J>",
-                    prev = "<M-K>",
-                    dismiss = "<M-H>",
+                    next = "<leader>J",
+                    -- prev = "<leader>K",
+                    dismiss = "<leader>H",
                 },
             },
         })
         -- require("copilot_cmp").setup()
-    end
+    end,
 }
