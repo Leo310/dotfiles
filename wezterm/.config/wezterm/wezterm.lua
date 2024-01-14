@@ -32,9 +32,9 @@ end
 
 if get_appearance():find("Dark") then
 	config.color_scheme = "Dracula"
-	os.execute(tmux_path .. " source-file ~/.tmux.dark.conf")
+	os.execute(tmux_path .. " source-file ~/.tmux.conf")
 else
-	os.execute(tmux_path .. " source-file ~/.tmux.light.conf")
+	os.execute(tmux_path .. " source-file ~/.tmux.conf")
 	config.color_scheme = "Edge Light (base16)"
 	-- config.color_scheme = "Dracula"
 end
@@ -62,17 +62,17 @@ config.keys = {
 	{ key = "z", mods = "CMD", action = wezterm.action({ SendString = "\x02z" }) },
 	{ key = "Tab", mods = "CTRL", action = wezterm.action({ SendString = "\x02n" }) },
 	{ key = "Grave", mods = "CTRL", action = wezterm.action({ SendString = "\x02p" }) },
-	{ key = "Comma", mods = "CMD", action = wezterm.action({ SendString = "\x02," }) },
-	{ key = "Period", mods = "CMD", action = wezterm.action({ SendString = "\x02:" }) },
-	{ key = "1", mods = "CMD", action = wezterm.action({ SendString = "\x021" }) },
-	{ key = "2", mods = "CMD", action = wezterm.action({ SendString = "\x022" }) },
-	{ key = "3", mods = "CMD", action = wezterm.action({ SendString = "\x023" }) },
-	{ key = "4", mods = "CMD", action = wezterm.action({ SendString = "\x024" }) },
-	{ key = "5", mods = "CMD", action = wezterm.action({ SendString = "\x025" }) },
-	{ key = "6", mods = "CMD", action = wezterm.action({ SendString = "\x026" }) },
-	{ key = "7", mods = "CMD", action = wezterm.action({ SendString = "\x027" }) },
-	{ key = "8", mods = "CMD", action = wezterm.action({ SendString = "\x028" }) },
-	{ key = "9", mods = "CMD", action = wezterm.action({ SendString = "\x029" }) },
+	{ key = "Comma", mods = "SUPER", action = wezterm.action({ SendString = "\x02," }) },
+	{ key = "Period", mods = "SUPER", action = wezterm.action({ SendString = "\x02:" }) },
+	{ key = "1", mods = "SUPER", action = wezterm.action({ SendString = "\x021" }) },
+	{ key = "2", mods = "SUPER", action = wezterm.action({ SendString = "\x022" }) },
+	{ key = "3", mods = "SUPER", action = wezterm.action({ SendString = "\x023" }) },
+	{ key = "4", mods = "SUPER", action = wezterm.action({ SendString = "\x024" }) },
+	{ key = "5", mods = "SUPER", action = wezterm.action({ SendString = "\x025" }) },
+	{ key = "6", mods = "SUPER", action = wezterm.action({ SendString = "\x026" }) },
+	{ key = "7", mods = "SUPER", action = wezterm.action({ SendString = "\x027" }) },
+	{ key = "8", mods = "SUPER", action = wezterm.action({ SendString = "\x028" }) },
+	{ key = "9", mods = "SUPER", action = wezterm.action({ SendString = "\x029" }) },
 }
 
 config.hide_tab_bar_if_only_one_tab = true
