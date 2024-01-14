@@ -1,0 +1,54 @@
+#+TITLE: Darkman Configuration
+#+PROPERTY: header-args :tangle-mode (identity #o555) :shebang "#!/bin/sh" :mkdirp yes :comments both
+#+AUTO_TANGLE: t
+
+This is my setup to implement a global (of sorts) dark mode without something like Gnome and related settings daemons. I use [[https://gitlab.com/WhyNotHugo/darkman][darkman]]. For easing off that harsh blue light at night, I use [[https://github.com/maandree/blueshift/][blueshift]].
+
+* Dark Mode
+** GTK
+:PROPERTIES:
+:header-args+: :tangle "./.local/share/dark-mode.d/gtk.sh"
+:END:
+For GTK need to send ~HUP~ to the ~xsettings~ daemon to reload settings. This does give live changes of settings in things like Firefox. All this does is change the theme name to "-dark" from "-light" and reload. However, the mouse cursor theme is not updated on the root window (background) or in some programs. Opening lxappearance at least helps for the root window, so quickly open and kill that as a work around for now.
+
+Firefox has the extension [[https://github.com/skhzhang/time-based-themes/][automaticDark]] set to change themes based on the system theme (from "Light" to "Dark"); wouldn't be needed for Firefox themes where "Default" looks good for light and dark system themes. Also, [[https://darkreader.org/][Dark Reader]] is set to activate based on system theme as well (it can do its own browser dark theme, but doesn't quite match well for me).
+
+#+begin_src sh
+  sed --in-place --follow-symlinks 's/-light/-dark/' ~/.xsettingsd
+  sed --in-place --follow-symlinks 's/-Light/-Dark/' ~/.xsettingsd
+  killall -HUP xsettingsd
+  lxappearance&
+  sleep 0.2
+  killall lxappearance
+#+end_src
+** emacs
+:PROPERTIES:
+:header-args+: :tangle "./.local/share/dark-mode.d/emacs.sh"
+:END:
+For emacs, call a custom function that toggles between day and night themes. Provide the optional argument to make sure it switches to the correct theme if needed (if already the correct theme, does nothing).
+
+#+begin_src sh
+  emacsclient -e '(toggle-day-night-theme :dark)'
+#+end_src
+
+* Light Mode
+Does the same as the dark mode settings, just reversed.
+** GTK
+:PROPERTIES:
+:header-args+: :tangle "./.local/share/light-mode.d/gtk.sh"
+:END:
+#+begin_src sh
+  sed --in-place --follow-symlinks 's/-dark/-light/' ~/.xsettingsd
+  sed --in-place --follow-symlinks 's/-Dark/-Light/' ~/.xsettingsd
+  killall -HUP xsettingsd
+  lxappearance&
+  sleep 0.2
+  killall lxappearance
+#+end_src
+** emacs
+:PROPERTIES:
+:header-args+: :tangle "./.local/share/light-mode.d/emacs.sh"
+:END:
+#+begin_src sh
+  emacsclient -e '(toggle-day-night-theme :light)'
+#+end_src
