@@ -1,0 +1,5 @@
+export XDG_CURRENT_DESKTOP=awesome
+
+xbindkeys
+xsettingsd &
+xmodmap ~/.xmodmaprc

@@ -27,6 +27,4 @@ end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-return setmetatable({}, { 
-  __call = function(_, ...) return _M.get(...) end 
-})
+return setmetatable({}, { __call = function(_, ...) return _M.get(...) end })
