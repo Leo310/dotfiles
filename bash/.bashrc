@@ -121,21 +121,21 @@ unset color_prompt force_color_prompt
 # ==========================
 
 # different color in ssh shell
-myssh() {
-    if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
-        # in tmux
-        printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Ssh"
-		# remote clipboard
-		ssh $1 -R 5556:localhost:5556
-    printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Dracula"
-	else
-		# not in tmux
-		konsoleprofile colors=Ssh
-		ssh $1
-		konsoleprofile colors=Dracula
-	fi
-}
-alias ssh='myssh'
+# myssh() {
+#     if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+#         # in tmux
+#         printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Ssh"
+# 		# remote clipboard
+# 		ssh $1 -R 5556:localhost:5556
+#     printf '\033Ptmux;\033\033]50;%s\007\033\\' "colors=Dracula"
+# 	else
+# 		# not in tmux
+# 		konsoleprofile colors=Ssh
+# 		ssh $1
+# 		konsoleprofile colors=Dracula
+# 	fi
+# }
+# alias ssh='myssh'
 
 
 
@@ -143,11 +143,13 @@ alias ssh='myssh'
 # ========  Neofetch =========
 # ==========================
 
-TMUX_INSTANCES=$(($(tmux list-panes | wc -l) + $(tmux list-windows | wc -l)))
-
-if [ $TMUX_INSTANCES -le 2 ]; then
-	neofetch
-fi
+# if ! { [ "$TERM" = "screen" ] && [ -n "$TMUX" ]; } then
+#     TMUX_INSTANCES=$(($(tmux list-panes | wc -l) + $(tmux list-windows | wc -l)))
+#
+#     if [ $TMUX_INSTANCES -le 2 ]; then
+#         neofetch
+#     fi
+# fi
 
 
 
@@ -168,6 +170,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
     alias diff='diff --color=auto'
     alias ip='ip --color=auto'
+    alias tmux='tmux -2' # forces tmux to use full 256 colors
 
     export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
     export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
@@ -181,3 +184,4 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH=$BUN_INSTALL/bin:$PATH
+export PATH=$PATH:/Users/I551991/.spicetify

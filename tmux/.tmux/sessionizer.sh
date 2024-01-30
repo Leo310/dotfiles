@@ -5,7 +5,7 @@ if [[ $# -eq 1 ]]; then
 else
     # to add dotfiles directoy i added a symlink of dotfiles to the project folder
     # and use the -L flag to also find symlnks
-    if [[ "$(defaults read -g AppleInterfaceStyle)" == "Dark" ]] || [[ "$(darkman get)" == "dark" ]]; then
+    if [[ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" == "Dark" ]] || [[ "$(darkman get)" == "dark" ]]; then
         # macOS is in Dark Mode
         export FZF_DEFAULT_OPTS='--height 100% --layout=reverse --border --color=fg:#f8f8f2,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
     else

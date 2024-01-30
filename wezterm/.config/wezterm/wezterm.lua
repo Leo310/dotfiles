@@ -45,6 +45,9 @@ config.font = wezterm.font("Fira Code")
 
 config.window_background_opacity = 0.8
 config.macos_window_background_blur = 20
+
+-- config.send_composed_key_when_left_alt_is_pressed = true
+
 -- config.disable_default_key_bindings = true
 config.keys = {
 	{ key = "f", mods = "CMD", action = wezterm.action({ SendString = "\x02f" }) },
